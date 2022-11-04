@@ -1,9 +1,8 @@
 import { StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useFonts, Raleway_100Thin, Raleway_400Regular, Raleway_600SemiBold, Raleway_700Bold } from '@expo-google-fonts/raleway';
-import { Login } from './src/screens/Login';
-import { Register } from './src/screens/Register';
-
+import { NavigationContainer } from "@react-navigation/native";
+import MainStackNavigation from './src/navigations/MainStackNavigation';
 export default function App() {
   let [fontsLoaded] = useFonts({
     Raleway_100Thin,
@@ -17,9 +16,11 @@ export default function App() {
   }
 
   return (
-    <SafeAreaView style={styles.container}>
-      <Login />
-    </SafeAreaView>
+    <NavigationContainer>
+      <SafeAreaView style={styles.container}>
+        <MainStackNavigation />
+      </SafeAreaView>
+    </NavigationContainer>
   );
 }
 
