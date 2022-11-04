@@ -1,30 +1,36 @@
-import { StyleSheet, Text, View } from 'react-native';
-import { Provider as PaperProvider, Button, TextInput } from 'react-native-paper';
+import { StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useFonts, Raleway_100Thin, Raleway_400Regular, Raleway_600SemiBold, Raleway_700Bold } from '@expo-google-fonts/raleway';
+import { Login } from './src/screens/Login';
+import { Register } from './src/screens/Register';
 
 export default function App() {
+  let [fontsLoaded] = useFonts({
+    Raleway_100Thin,
+    Raleway_400Regular,
+    Raleway_600SemiBold,
+    Raleway_700Bold,
+  });
+
+  if (!fontsLoaded) {
+    return null;
+  }
+
   return (
-    <PaperProvider>
-      <SafeAreaView style={styles.container}>
-        <View style={{ marginHorizontal: 30, flex: 1 }}>
-          <View style={{ flex: 1, justifyContent: 'center' }}>
-            <View style={{ marginLeft: 30, marginBottom: 50 }}>
-              <Text style={{ fontSize: 20 }}>Log in to</Text>
-              <Text style={{ fontSize: 20 }}>Your Account</Text>
-            </View>
-            <TextInput mode={'flat'} style={{ fontSize: 15, backgroundColor: 'transparent' }} placeholder="username" />
-            <TextInput mode={'flat'} style={{ fontSize: 15, backgroundColor: 'transparent' }} placeholder="password" />
-          </View>
-          <View style={{ flex: 1, justifyContent: 'center' }}>
-            <Button icon="camera" mode="contained" onPress={() => console.log('Pressed')}>
-              Press me
-            </Button>
-          </View>
-        </View>
-      </SafeAreaView>
-    </PaperProvider>
+    <SafeAreaView style={styles.container}>
+      <Login />
+    </SafeAreaView>
   );
 }
+
+const theme = {
+  colors: {
+    primary: '#FFC536',
+    green: '#00BA1E',
+    red: '#CA1D1D',
+    blue: '#1B50B7',
+  },
+};
 
 const styles = StyleSheet.create({
   container: {
