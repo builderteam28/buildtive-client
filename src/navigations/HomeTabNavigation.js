@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
 import Home from "../screens/Home";
-import Profile from "../screens/Profile";
+import MyProjects from "../screens/MyProjects";
 
 const Tab = createBottomTabNavigator();
 
@@ -16,8 +16,8 @@ export default function HomeTabNavigation() {
 
           if (route.name === "Home") {
             iconName = focused ? "home" : "home-outline";
-          } else if (route.name === "Profile") {
-            iconName = focused ? "person" : "person-outline";
+          } else if (route.name === "Projects") {
+            iconName = focused ? "briefcase-sharp" : "briefcase-outline";
           }
 
           return (
@@ -38,7 +38,7 @@ export default function HomeTabNavigation() {
         headerShown: false,
       })}>
       <Tab.Screen name="Home" component={Home} />
-      <Tab.Screen name="Profile" component={Profile} />
+      <Tab.Screen name="Projects" component={MyProjects} />
     </Tab.Navigator>
   );
 }

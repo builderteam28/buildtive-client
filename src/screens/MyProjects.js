@@ -1,7 +1,12 @@
-import { Text } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { Button, Text } from "react-native";
 
-export default function MyProjects() {
+export default function Profile() {
+  const navigation = useNavigation();
+
   return (
-    <Text>Page MyProjects</Text>
+    <>
+      <Text>Page Profile</Text>
+    </>
   )
 }
