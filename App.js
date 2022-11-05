@@ -26,7 +26,7 @@ export default function App() {
 
   return (
     <Provider store={store}>
-      <NavigationContainer>
+      <NavigationContainer theme={ReactNavTheme}>
         <SafeAreaView style={styles.container}>
           <MainStackNavigation />
         </SafeAreaView>
@@ -35,12 +35,9 @@ export default function App() {
   );
 }
 
-const theme = {
+const ReactNavTheme = {
   colors: {
-    primary: "#FFC536",
-    green: "#00BA1E",
-    red: "#CA1D1D",
-    blue: "#1B50B7",
+    background: "#ffffff"
   },
 };
 
