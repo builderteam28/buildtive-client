@@ -8,27 +8,7 @@ export default function Home() {
   return (
     <>
       <View style={{ flex: 1 }}>
-        <View
-          style={{
-            padding: 10,
-            flexDirection: "row",
-            alignItems: "center",
-          }}>
-          <Octicons
-            name="feed-person"
-            size={30}
-            color="black"
-            style={{ marginRight: 8 }}
-          />
-          <View>
-            <Text style={{ fontSize: 16, fontWeight: "500" }}>John Wick</Text>
-            <View style={{ flexDirection: "row", alignItems: "center" }}>
-              <MaterialIcons name="location-pin" size={14} color="black" />
-              <Text style={{ fontSize: 12 }}>Indonesia</Text>
-            </View>
-          </View>
-        </View>
-        <View style={{ padding: 10 }}>
+        <View style={{ padding: 20 }}>
           <Text style={{ fontSize: 24, marginBottom: 16 }}>
             Welcome to our app
           </Text>
