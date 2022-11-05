@@ -14,8 +14,8 @@ export default function MainStackNavigation() {
       screenOptions={{
         headerTitleAlign: "center",
       }}>
-      <Stack.Screen name="Login" component={Login} />
-      <Stack.Screen name="Register" component={Register} />
+      <Stack.Screen name="Login" component={Login} options={{headerShown: false}} />
+      <Stack.Screen name="Register" component={Register} options={{headerShown: false}} />
       <Stack.Screen name="HomeTabNavigation" component={HomeTabNavigation} options={{headerShown: false}} />
       <Stack.Screen name="ListWorker" component={ListWorker} />
       <Stack.Screen name="FormProject" component={FormProject} />
