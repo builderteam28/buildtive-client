@@ -21,7 +21,8 @@ export default function ListWorker({ route }) {
           flexDirection: "row",
           justifyContent: "space-between",
         }}>
-        <View
+        <TouchableOpacity
+          onPress={() => navigation.navigate("DetailWorker")}
           style={{
             height: 140,
             width: 140,
@@ -40,7 +41,7 @@ export default function ListWorker({ route }) {
             <Ionicons name="star" size={12} color="black" />
             <Text style={{ fontSize: 12 }}>4.9</Text>
           </View>
-        </View>
+        </TouchableOpacity>
         <View
           style={{
             height: 140,
