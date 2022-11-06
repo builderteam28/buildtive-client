@@ -1,5 +1,5 @@
 import { useNavigation } from "@react-navigation/native";
-import { Button, Text, View } from "react-native";
+import { Button, Text, TouchableOpacity, View } from "react-native";
 import { FontAwesome, SimpleLineIcons, FontAwesome5 } from "@expo/vector-icons";
 
 export default function Profile() {
@@ -96,7 +96,8 @@ export default function Profile() {
                 marginBottom: 20,
               }}>
               <Text style={{ fontSize: 18 }}>Category Name</Text>
-              <View
+              <TouchableOpacity
+                onPress={() => navigation.navigate("DetailProject")}
                 style={{
                   width: 80,
                   height: 30,
@@ -108,10 +109,12 @@ export default function Profile() {
                 <Text style={{ color: "white", fontWeight: "500" }}>
                   Details
                 </Text>
-              </View>
+              </TouchableOpacity>
             </View>
-            <View style={{ justifyContent: "center", alignItems: "center" }}>
-              {/* <View
+            <TouchableOpacity 
+              onPress={() => navigation.navigate("Rating")}
+              style={{ justifyContent: "center", alignItems: "center" }}>
+              <View
                 style={{
                   width: 120,
                   height: 30,
@@ -123,9 +126,9 @@ export default function Profile() {
                 <Text style={{ color: "white", fontWeight: "500" }}>
                   Already Paid
                 </Text>
-              </View> */}
-            </View>
-            <View
+              </View>
+            </TouchableOpacity>
+            {/* <View
               style={{
                 flexDirection: "row",
                 justifyContent: "space-between",
@@ -157,7 +160,7 @@ export default function Profile() {
                   Pay
                 </Text>
               </View>
-            </View>
+            </View> */}
           </View>
         </View>
       </View>
