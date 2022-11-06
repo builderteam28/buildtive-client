@@ -7,6 +7,7 @@ import Payment from "../screens/Payment";
 import HomeTabNavigation from "./HomeTabNavigation";
 import Rating from "../screens/Rating";
 import ListWorker from "../screens/ListWorker";
+import DetailProject from "../screens/DetailProject";
 const Stack = createStackNavigator();
 export default function MainStackNavigation() {
   return (
@@ -20,6 +21,7 @@ export default function MainStackNavigation() {
       <Stack.Screen name="ListWorker" component={ListWorker} options={{headerShown: false}} />
       <Stack.Screen name="FormProject" component={FormProject} />
       <Stack.Screen name="DetailWorker" component={DetailWorker} />
+      <Stack.Screen name="DetailProject" component={DetailProject} />
       <Stack.Screen name="Payment" component={Payment} />
       <Stack.Screen name="Rating" component={Rating} />
     </Stack.Navigator>
