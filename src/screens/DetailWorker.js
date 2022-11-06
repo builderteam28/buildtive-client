@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from "react-native";
 import { Octicons, FontAwesome, Ionicons, MaterialIcons } from "@expo/vector-icons";
-export default function MyProjects() {
+export default function DetailWorker() {
   return (
     <View style={styles.container}>
       <View style={styles.containerInfo}>
