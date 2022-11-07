@@ -1,14 +1,22 @@
 import { useNavigation } from "@react-navigation/native";
-import { Button, Image, Text, TouchableOpacity, View } from "react-native";
-import { Octicons } from "@expo/vector-icons";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { Image, Text, TouchableOpacity, View } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { getLocation } from "../store/actions/userActions";
+import HeaderTab from "../components/HeaderTab";
 export default function Home() {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getLocation());
+  }, []);
   return (
     <>
       <View style={{ flex: 1 }}>
-        <View style={{ padding: 20 }}>
+        <HeaderTab />
+        <View style={{ padding: 10 }}>
           <Text style={{ fontSize: 24, marginBottom: 16 }}>
             Welcome to our app
           </Text>
@@ -72,7 +80,9 @@ export default function Home() {
             justifyContent: "space-between",
           }}>
           <TouchableOpacity
-            onPress={() => navigation.navigate("ListWorker", {category: "Build House"})}
+            onPress={() =>
+              navigation.navigate("ListWorker", { category: "Build House" })
+            }
             style={{
               backgroundColor: "#FFC536",
               height: 100,
@@ -86,7 +96,9 @@ export default function Home() {
             <Text>Build Home</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => navigation.navigate("ListWorker", {category: "Electricity"})}
+            onPress={() =>
+              navigation.navigate("ListWorker", { category: "Electricity" })
+            }
             style={{
               backgroundColor: "#FFC536",
               height: 100,
@@ -103,7 +115,9 @@ export default function Home() {
             <Text>Electricity</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => navigation.navigate("ListWorker", {category: "Toilet"})}
+            onPress={() =>
+              navigation.navigate("ListWorker", { category: "Toilet" })
+            }
             style={{
               backgroundColor: "#FFC536",
               height: 100,
@@ -116,7 +130,9 @@ export default function Home() {
             <Text>Toilet</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => navigation.navigate("ListWorker", {category: "Repair"})}
+            onPress={() =>
+              navigation.navigate("ListWorker", { category: "Repair" })
+            }
             style={{
               backgroundColor: "#FFC536",
               height: 100,
@@ -133,7 +149,9 @@ export default function Home() {
             <Text>Repair</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => navigation.navigate("ListWorker", {category: "Painting"})}
+            onPress={() =>
+              navigation.navigate("ListWorker", { category: "Painting" })
+            }
             style={{
               backgroundColor: "#FFC536",
               height: 100,
@@ -146,7 +164,9 @@ export default function Home() {
             <Text>Painting</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => navigation.navigate("ListWorker", {category: "Plumbing"})}
+            onPress={() =>
+              navigation.navigate("ListWorker", { category: "Plumbing" })
+            }
             style={{
               backgroundColor: "#FFC536",
               height: 100,

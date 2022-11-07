@@ -4,7 +4,6 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
 import Home from "../screens/Home";
 import MyProjects from "../screens/MyProjects";
-import HeaderTab from "../components/HeaderTab";
 const Tab = createBottomTabNavigator();
 
 export default function HomeTabNavigation() {
@@ -33,12 +32,7 @@ export default function HomeTabNavigation() {
         tabBarStyle: {
           ...styles.tabBar,
         },
-
-        headerTitleAlign: "center",
-        header: HeaderTab,
-        headerStyle: {
-          height: 80
-        }
+        headerShown: false,
       })}>
       <Tab.Screen name="Home" component={Home} />
       <Tab.Screen name="Projects" component={MyProjects} />
