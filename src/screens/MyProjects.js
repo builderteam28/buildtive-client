@@ -1,6 +1,7 @@
 import { useNavigation } from "@react-navigation/native";
-import { Button, Text, TouchableOpacity, View } from "react-native";
+import { Text, TouchableOpacity, View } from "react-native";
 import { FontAwesome, SimpleLineIcons, FontAwesome5 } from "@expo/vector-icons";
+import HeaderTab from "../components/HeaderTab";
 
 export default function Profile() {
   const navigation = useNavigation();
@@ -8,13 +9,14 @@ export default function Profile() {
   return (
     <>
       <View style={{ flex: 1 }}>
+        <HeaderTab />
         <View
           style={{
             padding: 10,
             justifyContent: "center",
             alignItems: "center",
           }}>
-          <Text style={{ fontSize: 24, marginBottom: 16 }}>My Projects</Text>
+          <Text style={{ fontSize: 24, marginBottom: 10 }}>My Projects</Text>
         </View>
         <View style={{ flex: 1, padding: 30 }}>
           <View
@@ -111,7 +113,7 @@ export default function Profile() {
                 </Text>
               </TouchableOpacity>
             </View>
-            <TouchableOpacity 
+            <TouchableOpacity
               onPress={() => navigation.navigate("Rating")}
               style={{ justifyContent: "center", alignItems: "center" }}>
               <View

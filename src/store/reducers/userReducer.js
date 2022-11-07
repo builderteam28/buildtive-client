@@ -1,8 +1,9 @@
-import { USER_DATA } from "../actions/actionTypes";
+import { USER_DATA, USER_LOCATION } from "../actions/actionTypes";
 
 const initialState = {
   userData: {
     name: "",
+    location: "",
   },
 };
 
@@ -12,7 +13,17 @@ export default function userReducer(state = initialState, action) {
       return {
         ...state,
         userData: {
+          ...state.userData,
           name: action.payload,
+        },
+      };
+    }
+    case USER_LOCATION: {
+      return {
+        ...state,
+        userData: {
+          ...state.userData,
+          location: action.payload,
         },
       };
     }
