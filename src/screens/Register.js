@@ -12,7 +12,7 @@ import { createUser } from "../store/actions/userActions";
 
 export const Register = () => {
   const [registerData, setRegisterData] = useState({
-    username: "",
+    email: "",
     password: "",
     fullName: "",
     phoneNumber: "",
@@ -25,7 +25,11 @@ export const Register = () => {
   };
 
   const handleSubmit = () => {
-    dispatch(createUser(registerData));
+    dispatch(createUser(registerData)).then(data => {
+      if(data) {
+        navigation.navigate("Login")
+      }
+    })
   };
 
   return (
@@ -40,8 +44,8 @@ export const Register = () => {
           <TextInput
             selectionColor={"#FFC536"}
             style={styles.textInput}
-            placeholder="Username"
-            onChangeText={(text) => handleChange("username", text)}
+            placeholder="Email"
+            onChangeText={(text) => handleChange("email", text)}
           />
           <TextInput
             secureTextEntry={true}

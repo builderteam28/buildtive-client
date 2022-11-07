@@ -5,11 +5,16 @@ import globalBaseUrl from "../../helpers/globalBaseUrl";
 import { USER_DATA } from "./actionTypes";
 
 export const createUser = (payload) => {
-  return async (dispatch, getState) => {
+  return async () => {
     try {
-      console.log(payload);
+      const { data } = await axios({
+        method: "POST",
+        url: globalBaseUrl + "/users/register",
+        data: payload,
+      });
+      return data;
     } catch (error) {
-      console.error(error.message);
+      errorHandler(error);
     }
   };
 };
