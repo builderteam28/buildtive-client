@@ -12,7 +12,7 @@ import { loginUser } from "../store/actions/userActions";
 
 export const Login = () => {
   const [loginData, setLoginData] = useState({
-    username: "",
+    email: "",
     password: "",
   });
   const navigation = useNavigation();
@@ -22,7 +22,9 @@ export const Login = () => {
   };
 
   const handleSubmit = () => {
-    dispatch(loginUser(loginData));
+    dispatch(loginUser(loginData)).then((data) => {
+      if (data) navigation.navigate("HomeTabNavigation");
+    });
   };
 
   return (
@@ -38,8 +40,8 @@ export const Login = () => {
           <TextInput
             selectionColor={"#FFC536"}
             style={styles.textInput}
-            placeholder="Username"
-            onChangeText={(text) => handleChange("username", text)}
+            placeholder="Email"
+            onChangeText={(text) => handleChange("email", text)}
           />
           <TextInput
             secureTextEntry={true}
