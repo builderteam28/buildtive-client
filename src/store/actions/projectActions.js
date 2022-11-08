@@ -84,7 +84,7 @@ export const acceptWorker = (payload) => {
         headers: { access_token },
         data: { ProjectId: payload.ProjectId },
       });
-      
+
       return data;
     } catch (error) {
       errorHandler(error);
@@ -102,7 +102,7 @@ export const declineWorker = (payload) => {
         headers: { access_token },
         data: { ProjectId: payload.ProjectId },
       });
-      
+
       return data;
     } catch (error) {
       errorHandler(error);
@@ -125,4 +125,21 @@ export const createRatings = (payload) => {
       errorHandler(error);
     }
   };
-}
+};
+
+export const createPayment = (payload) => {
+  return async (dispatch, getState) => {
+    try {
+      const access_token = await AsyncStorage.getItem("access_token");
+      let { data } = await axios({
+        method: "POST",
+        url: globalBaseUrl + `/payments`,
+        headers: { access_token },
+        data: { cost: payload.cost, ProjectId: payload.ProjectId },
+      });
+      return data;
+    } catch (error) {
+      errorHandler(error);
+    }
+  };
+};

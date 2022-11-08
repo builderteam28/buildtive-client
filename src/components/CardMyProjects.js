@@ -1,9 +1,23 @@
 import { Text, View, TouchableOpacity, StyleSheet } from "react-native";
 import { FontAwesome, SimpleLineIcons, FontAwesome5 } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
+import { useDispatch } from "react-redux";
+import { createPayment } from "../store/actions/projectActions";
 
 export default function CardMyProjects({ project }) {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
+  const handlePay = () => {
+    dispatch(createPayment({ cost: project.cost, ProjectId: project.id }))
+      .then((data) => {
+        if (data) {
+          navigation.navigate("Payment", { transaction: data });
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   return (
     <View style={styles.container}>
       <View style={styles.content1}>
@@ -78,9 +92,11 @@ export default function CardMyProjects({ project }) {
           <View style={styles.notPaid}>
             <Text style={styles.buttonText}>Not Yet Paid</Text>
           </View>
-          <View style={styles.payButton}>
+          <TouchableOpacity
+            onPress={() => handlePay()}
+            style={styles.payButton}>
             <Text style={styles.buttonText}>Pay</Text>
-          </View>
+          </TouchableOpacity>
         </View>
       )}
       {project.Payment !== null && project.status !== "Completed" && (
