@@ -1,8 +1,27 @@
 import { useNavigation } from "@react-navigation/native";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { useDispatch } from "react-redux";
+import { acceptWorker, declineWorker } from "../store/actions/projectActions";
 export default function ProjectWorkerCard({ projectWorker }) {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
+  const handleAccept = () => {
+    dispatch(
+      acceptWorker({
+        WorkerId: projectWorker.WorkerId,
+        ProjectId: projectWorker.ProjectId,
+      })
+    );
+  };
+  const handleDecline = () => {
+    dispatch(
+      declineWorker({
+        WorkerId: projectWorker.WorkerId,
+        ProjectId: projectWorker.ProjectId,
+      })
+    );
+  };
   return (
     <TouchableOpacity style={styles.card} activeOpacity={0.8}>
       <View style={styles.containerOne}>
@@ -38,9 +57,10 @@ export default function ProjectWorkerCard({ projectWorker }) {
           </TouchableOpacity>
         </View>
       </View>
-      {projectWorker.status !== "Active" ? (
+      {projectWorker.status === "Applicant" && (
         <View style={styles.containerTwo}>
           <TouchableOpacity
+            onPress={() => handleAccept()}
             style={[
               styles.button,
               { marginHorizontal: 10, backgroundColor: "#00c853" },
@@ -48,6 +68,7 @@ export default function ProjectWorkerCard({ projectWorker }) {
             <Text style={styles.textButton}>Accept</Text>
           </TouchableOpacity>
           <TouchableOpacity
+            onPress={() => handleDecline()}
             style={[
               styles.button,
               { marginHorizontal: 10, backgroundColor: "#d50000" },
@@ -55,9 +76,20 @@ export default function ProjectWorkerCard({ projectWorker }) {
             <Text style={styles.textButton}>Decline</Text>
           </TouchableOpacity>
         </View>
-      ) : (
-        <View style={{ justifyContent: "center", alignItems: "center" }}>
-          <Text>Worker already accepted</Text>
+      )}
+      {projectWorker.status === "Accepted" && (
+        <View style={styles.status}>
+          <Text style={{ color: "#00c853" }}>Worker already accepted</Text>
+        </View>
+      )}
+      {projectWorker.status === "Rejected" && (
+        <View style={styles.status}>
+          <Text style={{ color: "#d50000" }}>Worker already rejected</Text>
+        </View>
+      )}
+      {projectWorker.status === "Occupied" && (
+        <View style={styles.status}>
+          <Text>Worker already accepted in another project</Text>
         </View>
       )}
     </TouchableOpacity>
@@ -97,4 +129,5 @@ const styles = StyleSheet.create({
     color: "white",
     fontWeight: "500",
   },
+  status: { justifyContent: "center", alignItems: "center" },
 });
