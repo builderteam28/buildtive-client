@@ -7,6 +7,9 @@ import { createPayment } from "../store/actions/projectActions";
 export default function CardMyProjects({ project }) {
   const navigation = useNavigation();
   const dispatch = useDispatch();
+  const formatPrice = (price) => {
+    return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+  };
   const handlePay = () => {
     dispatch(createPayment({ cost: project.cost, ProjectId: project.id }))
       .then((data) => {
@@ -57,7 +60,9 @@ export default function CardMyProjects({ project }) {
             color="black"
             style={{ marginRight: 14 }}
           />
-          <Text style={{ fontSize: 18 }}>{project.cost}</Text>
+          <Text style={{ fontSize: 18 }}>
+            Rp. {formatPrice(project.cost)},-
+          </Text>
         </View>
         <View style={styles.description}>
           <FontAwesome
@@ -87,18 +92,25 @@ export default function CardMyProjects({ project }) {
           <Text style={styles.buttonText}>Details</Text>
         </TouchableOpacity>
       </View>
-      {project.Payment === null && (
-        <View style={styles.content2}>
-          <View style={styles.notPaid}>
-            <Text style={styles.buttonText}>Not Yet Paid</Text>
+      {project.status === "Active" && (
+          <View style={styles.content2}>
+            <View style={styles.notPaid}>
+              <Text style={styles.buttonText}>Not Yet Paid</Text>
+            </View>
+            <TouchableOpacity
+              onPress={() => handlePay()}
+              style={styles.payButton}>
+              <Text style={styles.buttonText}>Pay</Text>
+            </TouchableOpacity>
           </View>
-          <TouchableOpacity
-            onPress={() => handlePay()}
-            style={styles.payButton}>
-            <Text style={styles.buttonText}>Pay</Text>
-          </TouchableOpacity>
-        </View>
-      )}
+        )}
+      {project.status ==="Inactive" && (
+          <View style={{ justifyContent: "center", alignItems: "center" }}>
+            <View style={styles.waitButton}>
+              <Text style={styles.buttonText}>Waiting for workers</Text>
+            </View>
+          </View>
+        )}
       {project.Payment !== null && project.status !== "Completed" && (
         <TouchableOpacity
           onPress={() =>
@@ -166,6 +178,14 @@ const styles = StyleSheet.create({
   },
   completed2: {
     width: 120,
+    height: 30,
+    borderRadius: 20,
+    backgroundColor: "#102027",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  waitButton: {
+    width: 150,
     height: 30,
     borderRadius: 20,
     backgroundColor: "#102027",

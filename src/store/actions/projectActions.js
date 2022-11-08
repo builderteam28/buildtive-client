@@ -30,6 +30,7 @@ export const getMyProjects = () => {
         url: globalBaseUrl + "/users/projects",
         headers: { access_token },
       });
+      console.log(data)
       const newData = data.map((el) => {
         const acceptedWorker = el.ProjectWorkers.filter(
           (e) => e.status === "Accepted"

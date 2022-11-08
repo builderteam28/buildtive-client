@@ -3,7 +3,8 @@ import { StyleSheet } from "react-native";
 import { WebView } from "react-native-webview";
 
 export default function Payment({ route }) {
-  const { transaction } = route.params.transaction;
+  const { transaction } = route.params;
+  console.log(transaction)
   const navigation = useNavigation();
   const handleWebViewNavigationStateChange = (newNavState) => {
     const { url } = newNavState;
