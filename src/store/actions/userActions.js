@@ -31,7 +31,7 @@ export const loginUser = (payload) => {
       await AsyncStorage.setItem("access_token", data.access_token);
       dispatch({
         type: USER_DATA,
-        payload: data.name,
+        payload: data.fullName,
       });
       return data;
     } catch (error) {
