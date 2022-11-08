@@ -37,7 +37,7 @@ export default function App() {
 
 const ReactNavTheme = {
   colors: {
-    background: "#ffffff"
+    background: "#ffffff",
   },
 };
 

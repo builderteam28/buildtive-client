@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as Location from "expo-location";
-import MapView, { Callout, Marker, PROVIDER_GOOGLE } from "react-native-maps";
+import MapView, { Marker } from "react-native-maps";
 import {
   ActivityIndicator,
   Dimensions,
@@ -12,7 +12,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 // import { theme } from '../helpers/theme';
 
-export default function MapDetail() {
+export default function MapDetail({ project }) {
   const [location, setLocation] = useState(null);
   const [loading, setLoading] = useState(true);
   const [errorMsg, setErrorMsg] = useState("");
@@ -39,15 +39,15 @@ export default function MapDetail() {
         <MapView
           style={styles.map}
           initialRegion={{
-            latitude: location.coords.latitude,
-            longitude: location.coords.longitude,
-            latitudeDelta: 0.01,
-            longitudeDelta: 0.01,
+            latitude: project.lat,
+            longitude: project.long,
+            latitudeDelta: 0.005,
+            longitudeDelta: 0.005,
           }}>
           <Marker
             coordinate={{
-              latitude: location.coords.latitude,
-              longitude: location.coords.longitude,
+              latitude: project.lat,
+              longitude: project.long,
             }}
             pinColor="black"></Marker>
         </MapView>

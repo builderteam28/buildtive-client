@@ -12,6 +12,8 @@ import MapView from "react-native-maps";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import Dropdown from "../components/Dropdown";
+import { useDispatch } from "react-redux";
+import { createProject } from "../store/actions/projectActions";
 
 export default function FormProject() {
   const [step, setStep] = useState(1);
@@ -23,16 +25,17 @@ export default function FormProject() {
     longitude: 106.2608,
   });
   const [projectData, setProjectData] = useState({
-    projectName: "",
-    workHours: "",
+    name: "",
+    tenor: "",
     totalWorker: "",
     cost: "",
     address: "",
+    description: "",
     category: {},
   });
 
   const navigation = useNavigation();
-
+  const dispatch = useDispatch();
   const [categories] = useState([
     {
       id: 1,
@@ -84,12 +87,17 @@ export default function FormProject() {
   const handleSubmit = () => {
     let input = {
       ...projectData,
-      CategoryId: projectData.category.id,
       lat: region.latitude,
       long: region.longitude,
+      CategoryId: projectData.category.id,
     };
     delete input.category;
-    console.log(input);
+
+    dispatch(createProject(input)).then((data) => {
+      if (data) {
+        navigation.navigate("HomeTabNavigation", { screen: "Projects" });
+      }
+    });
   };
 
   useEffect(() => {
@@ -150,31 +158,40 @@ export default function FormProject() {
               selectionColor={"#FFC536"}
               style={styles.textInput}
               placeholder="Project Name"
-              onChangeText={(text) => handleChange("projectName", text)}
+              onChangeText={(text) => handleChange("name", text)}
             />
             <TextInput
               selectionColor={"#FFC536"}
               style={styles.textInput}
-              placeholder="Work Hours"
-              onChangeText={(text) => handleChange("workHours", text)}
-            />
-            <TextInput
-              selectionColor={"#FFC536"}
-              style={styles.textInput}
-              placeholder="Total Worker"
-              onChangeText={(text) => handleChange("totalWorker", text)}
-            />
-            <TextInput
-              selectionColor={"#FFC536"}
-              style={styles.textInput}
-              placeholder="Cost"
-              onChangeText={(text) => handleChange("cost", text)}
+              placeholder="Description"
+              onChangeText={(text) => handleChange("description", text)}
             />
             <TextInput
               selectionColor={"#FFC536"}
               style={styles.textInput}
               placeholder="Address"
               onChangeText={(text) => handleChange("address", text)}
+            />
+            <TextInput
+              selectionColor={"#FFC536"}
+              style={styles.textInput}
+              placeholder="Day of works"
+              keyboardType="number-pad"
+              onChangeText={(text) => handleChange("tenor", text)}
+            />
+            <TextInput
+              selectionColor={"#FFC536"}
+              style={styles.textInput}
+              placeholder="Total Worker"
+              keyboardType="number-pad"
+              onChangeText={(text) => handleChange("totalWorker", text)}
+            />
+            <TextInput
+              selectionColor={"#FFC536"}
+              style={styles.textInput}
+              placeholder="Cost"
+              keyboardType="number-pad"
+              onChangeText={(text) => handleChange("cost", text)}
             />
             <View style={styles.inputContainer}>
               <Dropdown

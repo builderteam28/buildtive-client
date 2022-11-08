@@ -1,7 +1,7 @@
 import { useNavigation } from "@react-navigation/native";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-export default function ProjectWorkerCard({ detail }) {
+export default function ProjectWorkerCard({ projectWorker }) {
   const navigation = useNavigation();
   return (
     <TouchableOpacity style={styles.card} activeOpacity={0.8}>
@@ -14,7 +14,7 @@ export default function ProjectWorkerCard({ detail }) {
               color="black"
               style={styles.icon}
             />
-            <Text style={styles.text}>{detail.worker.name}</Text>
+            <Text style={styles.text}>{projectWorker.Worker.fullName}</Text>
           </View>
           <View style={styles.dataContainer}>
             <Ionicons
@@ -23,18 +23,22 @@ export default function ProjectWorkerCard({ detail }) {
               color="black"
               style={styles.icon}
             />
-            <Text style={styles.text}>{detail.worker.address}</Text>
+            <Text style={styles.text}>{projectWorker.Worker.address}</Text>
           </View>
         </View>
         <View>
           <TouchableOpacity
-            onPress={() => navigation.navigate("DetailWorker")}
+            onPress={() =>
+              navigation.navigate("DetailWorker", {
+                WorkerId: projectWorker.Worker.id,
+              })
+            }
             style={[styles.button, { backgroundColor: "#FFC536" }]}>
             <Text style={styles.textButton}>Profile</Text>
           </TouchableOpacity>
         </View>
       </View>
-      {detail.status !== "Accepted" ? (
+      {projectWorker.status !== "Active" ? (
         <View style={styles.containerTwo}>
           <TouchableOpacity
             style={[

@@ -25,11 +25,11 @@ export const Register = () => {
   };
 
   const handleSubmit = () => {
-    dispatch(createUser(registerData)).then(data => {
-      if(data) {
-        navigation.navigate("Login")
+    dispatch(createUser(registerData)).then((data) => {
+      if (data) {
+        navigation.navigate("Login");
       }
-    })
+    });
   };
 
   return (
