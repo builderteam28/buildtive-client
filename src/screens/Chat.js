@@ -18,11 +18,9 @@ export default function Chat() {
       },
     ]);
   }, []);
-  socket.on("newMessages", (data) => {
-    
-  })
+  socket.on("newMessages", (data) => {});
   const onSend = useCallback((messages = []) => {
-    socket.emit("newMessage", messages)
+    socket.emit("newMessage", messages);
     setMessages((previousMessages) =>
       GiftedChat.append(previousMessages, messages)
     );

@@ -1,36 +1,54 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { useDispatch, useSelector } from "react-redux";
 import Details from "../components/Details";
 import MapDetail from "../components/MapDetail";
 import ProjectWorkers from "../components/ProjectWorkers";
+import { getProject } from "../store/actions/projectActions";
 
-export default function DetailProject() {
+export default function DetailProject({ route }) {
+  const [isLoading, setIsLoading] = useState(true);
+  const { project } = useSelector((state) => state.project);
   const [show, setShow] = useState("Details");
   const changeShow = (input) => {
     setShow(input);
   };
-  return (
-    <View style={styles.container}>
-      <MapDetail />
-      <View style={styles.containerDetail}>
-        <View style={styles.switchContainer}>
-          <TouchableOpacity onPress={() => changeShow("Details")}>
-            <Text style={[styles.button, { backgroundColor: "#e0e0e0" }]}>
-              Details
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => changeShow("Lists")}>
-            <Text style={[styles.button, { backgroundColor: "#FFC536" }]}>
-              Project Applicants
-            </Text>
-          </TouchableOpacity>
-        </View>
-        <View style={{ flex: 1 }}>
-          {show === "Details" ? <Details /> : <ProjectWorkers />}
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getProject(route.params.ProjectId)).then((data) => {
+      if (data) {
+        setIsLoading(false);
+      }
+    });
+  }, []);
+  if (!isLoading) {
+    return (
+      <View style={styles.container}>
+        <MapDetail project={project} />
+        <View style={styles.containerDetail}>
+          <View style={styles.switchContainer}>
+            <TouchableOpacity onPress={() => changeShow("Details")}>
+              <Text style={[styles.button, { backgroundColor: "#e0e0e0" }]}>
+                Details
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => changeShow("Lists")}>
+              <Text style={[styles.button, { backgroundColor: "#FFC536" }]}>
+                Project Applicants
+              </Text>
+            </TouchableOpacity>
+          </View>
+          <View style={{ flex: 1 }}>
+            {show === "Details" ? (
+              <Details project={project} />
+            ) : (
+              <ProjectWorkers workers={project.ProjectWorkers} />
+            )}
+          </View>
         </View>
       </View>
-    </View>
-  );
+    );
+  }
 }
 const styles = StyleSheet.create({
   container: {

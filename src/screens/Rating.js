@@ -8,8 +8,7 @@ export default function Rating() {
   return (
     <>
       <View style={styles.container}>
-        <View
-          style={styles.containerHeading}>
+        <View style={styles.containerHeading}>
           <Text style={styles.heading}>Let's rate your project</Text>
           <Text style={styles.heading2}>
             How did you like the results from project NamaProject?
@@ -75,8 +74,7 @@ export default function Rating() {
           />
         </View>
         {starRating && (
-          <TouchableOpacity
-            style={styles.submitButton}>
+          <TouchableOpacity style={styles.submitButton}>
             <Text style={styles.submitText}>Submit</Text>
           </TouchableOpacity>
         )}

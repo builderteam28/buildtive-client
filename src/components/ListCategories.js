@@ -9,7 +9,10 @@ export default function ListCategories() {
       <View style={styles.container}>
         <TouchableOpacity
           onPress={() =>
-            navigation.navigate("ListWorker", { CategoryId: 1, name: "Build Home" })
+            navigation.navigate("ListWorker", {
+              CategoryId: 1,
+              name: "Build Home",
+            })
           }
           style={styles.card}>
           <MaterialIcons name="house" size={60} color="black" />
@@ -17,7 +20,10 @@ export default function ListCategories() {
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() =>
-            navigation.navigate("ListWorker", { CategoryId: 2, name: "Electricity" })
+            navigation.navigate("ListWorker", {
+              CategoryId: 2,
+              name: "Electricity",
+            })
           }
           style={styles.card}>
           <MaterialCommunityIcons
@@ -49,7 +55,10 @@ export default function ListCategories() {
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() =>
-            navigation.navigate("ListWorker", { CategoryId: 5, name: "Painting" })
+            navigation.navigate("ListWorker", {
+              CategoryId: 5,
+              name: "Painting",
+            })
           }
           style={styles.card}>
           <MaterialIcons name="format-paint" size={60} color="black" />
@@ -57,7 +66,10 @@ export default function ListCategories() {
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() =>
-            navigation.navigate("ListWorker", { CategoryId: 6, name: "Plumbing" })
+            navigation.navigate("ListWorker", {
+              CategoryId: 6,
+              name: "Plumbing",
+            })
           }
           style={styles.card}>
           <MaterialIcons name="plumbing" size={60} color="black" />

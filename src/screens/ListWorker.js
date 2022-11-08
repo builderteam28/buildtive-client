@@ -11,8 +11,8 @@ export default function ListWorker({ route }) {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(workersById(route.params.CategoryId))
-  }, [])
+    dispatch(workersById(route.params.CategoryId));
+  }, []);
   const renderItem = ({ item }) => <CardListWorker worker={item} />;
   return (
     <>
@@ -31,12 +31,12 @@ export default function ListWorker({ route }) {
           flexDirection: "row",
           justifyContent: "space-between",
         }}>
-          <FlatList
+        <FlatList
           data={workers}
           renderItem={renderItem}
           keyExtractor={(worker) => worker.id}
           numColumns={2}
-          />
+        />
       </View>
     </>
   );

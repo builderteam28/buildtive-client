@@ -2,21 +2,23 @@ import { Text, View, TouchableOpacity, StyleSheet } from "react-native";
 import { FontAwesome, SimpleLineIcons, FontAwesome5 } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 
-export default function CardMyProjects() {
+export default function CardMyProjects({ project }) {
   const navigation = useNavigation();
-
   return (
     <View style={styles.container}>
       <View style={styles.content1}>
         <Text style={{ width: 200, fontSize: 18, fontWeight: "500" }}>
-          Nama Project ini adalah Sesuatu
+          {project.name}
         </Text>
-        <View style={styles.active}>
-          <Text style={styles.buttonText}>Active</Text>
-        </View>
-        {/* <View style={styles.inactive}>
-          <Text style={styles.buttonText}>Inactive</Text>
-        </View> */}
+        {project.status === "Active" ? (
+          <View style={styles.active}>
+            <Text style={styles.buttonText}>Active</Text>
+          </View>
+        ) : (
+          <View style={styles.inactive}>
+            <Text style={styles.buttonText}>Inactive</Text>
+          </View>
+        )}
       </View>
       <View style={{ marginBottom: 10 }}>
         <View style={styles.description}>
@@ -26,7 +28,7 @@ export default function CardMyProjects() {
             color="black"
             style={{ marginRight: 20 }}
           />
-          <Text style={{ fontSize: 18 }}>Duration</Text>
+          <Text style={{ fontSize: 18 }}>{project.tenor} day</Text>
         </View>
         <View style={styles.description}>
           <FontAwesome5
@@ -35,7 +37,7 @@ export default function CardMyProjects() {
             color="black"
             style={{ marginRight: 14 }}
           />
-          <Text style={{ fontSize: 18 }}>50.000.000</Text>
+          <Text style={{ fontSize: 18 }}>{project.cost}</Text>
         </View>
         <View style={styles.description}>
           <FontAwesome
@@ -44,32 +46,39 @@ export default function CardMyProjects() {
             color="black"
             style={{ marginRight: 18 }}
           />
-          <Text style={{ fontSize: 18 }}> 6/6</Text>
+          <Text style={{ fontSize: 18 }}>
+            {project.acceptedWorker}/{project.totalWorker}
+          </Text>
         </View>
       </View>
       <View style={styles.content2}>
-        <Text style={{ fontSize: 18 }}>Category Name</Text>
+        <Text style={{ fontSize: 18 }}>{project.Category.name}</Text>
         <TouchableOpacity
-          onPress={() => navigation.navigate("DetailProject")}
+          onPress={() =>
+            navigation.navigate("DetailProject", { ProjectId: project.id })
+          }
           style={styles.detailButton}>
           <Text style={styles.buttonText}>Details</Text>
         </TouchableOpacity>
       </View>
-      <TouchableOpacity
-        onPress={() => navigation.navigate("Rating")}
-        style={{ justifyContent: "center", alignItems: "center" }}>
-        <View style={styles.paidButton}>
-          <Text style={styles.buttonText}>Already Paid</Text>
+      {project.Payment ? (
+        <TouchableOpacity
+          onPress={() => navigation.navigate("Rating")}
+          style={{ justifyContent: "center", alignItems: "center" }}>
+          <View style={styles.paidButton}>
+            <Text style={styles.buttonText}>Already Paid</Text>
+          </View>
+        </TouchableOpacity>
+      ) : (
+        <View style={styles.content2}>
+          <View style={styles.notPaid}>
+            <Text style={styles.buttonText}>Not Yet Paid</Text>
+          </View>
+          <View style={styles.payButton}>
+            <Text style={styles.buttonText}>Pay</Text>
+          </View>
         </View>
-      </TouchableOpacity>
-      <View style={styles.content2}>
-        {/* <View style={styles.notPaid}>
-          <Text style={styles.buttonText}>Not Yet Paid</Text>
-        </View>
-        <View style={styles.payButton}>
-          <Text style={styles.buttonText}>Pay</Text>
-        </View> */}
-      </View>
+      )}
     </View>
   );
 }
@@ -79,6 +88,7 @@ const styles = StyleSheet.create({
     padding: 20,
     backgroundColor: "#FFC536",
     borderRadius: 20,
+    marginBottom: "10%",
   },
   content1: {
     flexDirection: "row",

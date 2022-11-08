@@ -4,7 +4,7 @@ import {
   applyMiddleware,
 } from "redux";
 import thunk from "redux-thunk";
-import userReducer from "./reducers/userReducer"
+import userReducer from "./reducers/userReducer";
 import workerReducer from "./reducers/workerReducer";
 import projectReducer from "./reducers/projectReducer";
 import paymentReducer from "./reducers/paymentReducer";
@@ -17,9 +17,9 @@ const rootReducer = combineReducers({
   project: projectReducer,
   payment: paymentReducer,
   rating: ratingReducer,
-  category: categoryReducer
+  category: categoryReducer,
 });
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
 
-export default store
+export default store;

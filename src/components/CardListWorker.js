@@ -6,7 +6,9 @@ export default function CardListWorker({ worker }) {
   const navigation = useNavigation();
   return (
     <TouchableOpacity
-      onPress={() => navigation.navigate("DetailWorker")}
+      onPress={() =>
+        navigation.navigate("DetailWorker", { WorkerId: worker.id })
+      }
       style={styles.card}>
       <Octicons
         name="feed-person"
@@ -14,10 +16,10 @@ export default function CardListWorker({ worker }) {
         color="black"
         style={{ marginBottom: 8 }}
       />
-      <Text>Bambang Prakoso</Text>
+      <Text>{worker.Worker.fullName}</Text>
       <View style={{ flexDirection: "row", alignItems: "center" }}>
         <MaterialIcons name="location-pin" size={14} color="black" />
-        <Text style={{ fontSize: 12 }}>Indonesia</Text>
+        <Text style={{ fontSize: 12 }}>{worker.Worker.address}</Text>
       </View>
       <View style={{ flexDirection: "row", alignItems: "center" }}>
         <Ionicons name="star" size={12} color="black" />
@@ -35,6 +37,6 @@ const styles = StyleSheet.create({
     borderRadius: 14,
     backgroundColor: "#FFC536",
     alignItems: "center",
-    margin: "4%"
+    margin: "4%",
   },
 });

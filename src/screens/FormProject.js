@@ -30,7 +30,7 @@ export default function FormProject() {
     totalWorker: "",
     cost: "",
     address: "",
-    description:"",
+    description: "",
     category: {},
   });
 
@@ -93,11 +93,11 @@ export default function FormProject() {
     };
     delete input.category;
 
-    dispatch(createProject(input)).then(data => {
-      if(data) {
-        navigation.navigate("Home")
+    dispatch(createProject(input)).then((data) => {
+      if (data) {
+        navigation.navigate("HomeTabNavigation", { screen: "Projects" });
       }
-    })
+    });
   };
 
   useEffect(() => {
