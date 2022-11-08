@@ -8,6 +8,7 @@ import HomeTabNavigation from "./HomeTabNavigation";
 import Rating from "../screens/Rating";
 import ListWorker from "../screens/ListWorker";
 import DetailProject from "../screens/DetailProject";
+import Chat from "../screens/Chat";
 const Stack = createStackNavigator();
 export default function MainStackNavigation() {
   return (
@@ -24,6 +25,7 @@ export default function MainStackNavigation() {
       <Stack.Screen name="DetailProject" component={DetailProject} options={{headerShown: false}} />
       <Stack.Screen name="Payment" component={Payment} />
       <Stack.Screen name="Rating" component={Rating} />
+      <Stack.Screen name="Chat" component={Chat} />
     </Stack.Navigator>
   );
 }
