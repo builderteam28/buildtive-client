@@ -10,13 +10,19 @@ export default function CardMyProjects({ project }) {
         <Text style={{ width: 200, fontSize: 18, fontWeight: "500" }}>
           {project.name}
         </Text>
-        {project.status === "Active" ? (
+        {project.status === "Active" && (
           <View style={styles.active}>
             <Text style={styles.buttonText}>Active</Text>
           </View>
-        ) : (
+        )}
+        {project.status === "Inactive" && (
           <View style={styles.inactive}>
             <Text style={styles.buttonText}>Inactive</Text>
+          </View>
+        )}
+        {project.status === "Completed" && (
+          <View style={styles.completed}>
+            <Text style={styles.buttonText}>Completed</Text>
           </View>
         )}
       </View>
@@ -46,9 +52,15 @@ export default function CardMyProjects({ project }) {
             color="black"
             style={{ marginRight: 18 }}
           />
-          <Text style={{ fontSize: 18 }}>
-            {project.acceptedWorker}/{project.totalWorker}
-          </Text>
+          {project.status === "Completed" ? (
+            <Text style={{ fontSize: 18 }}>
+              {project.totalWorker}/{project.totalWorker}
+            </Text>
+          ) : (
+            <Text style={{ fontSize: 18 }}>
+              {project.acceptedWorker}/{project.totalWorker}
+            </Text>
+          )}
         </View>
       </View>
       <View style={styles.content2}>
@@ -61,21 +73,31 @@ export default function CardMyProjects({ project }) {
           <Text style={styles.buttonText}>Details</Text>
         </TouchableOpacity>
       </View>
-      {project.Payment ? (
-        <TouchableOpacity
-          onPress={() => navigation.navigate("Rating")}
-          style={{ justifyContent: "center", alignItems: "center" }}>
-          <View style={styles.paidButton}>
-            <Text style={styles.buttonText}>Already Paid</Text>
-          </View>
-        </TouchableOpacity>
-      ) : (
+      {project.Payment === null && (
         <View style={styles.content2}>
           <View style={styles.notPaid}>
             <Text style={styles.buttonText}>Not Yet Paid</Text>
           </View>
           <View style={styles.payButton}>
             <Text style={styles.buttonText}>Pay</Text>
+          </View>
+        </View>
+      )}
+      {project.Payment !== null && project.status !== "Completed" && (
+        <TouchableOpacity
+          onPress={() =>
+            navigation.navigate("Rating", { ProjectId: project.id })
+          }
+          style={{ justifyContent: "center", alignItems: "center" }}>
+          <View style={styles.paidButton}>
+            <Text style={styles.buttonText}>Already Paid</Text>
+          </View>
+        </TouchableOpacity>
+      )}
+      {project.status === "Completed" && (
+        <View style={{ justifyContent: "center", alignItems: "center" }}>
+          <View style={styles.completed2}>
+            <Text style={styles.buttonText}>Completed</Text>
           </View>
         </View>
       )}
@@ -115,6 +137,22 @@ const styles = StyleSheet.create({
     height: 30,
     borderRadius: 20,
     backgroundColor: "#d50000",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  completed: {
+    width: 80,
+    height: 30,
+    borderRadius: 20,
+    backgroundColor: "#102027",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  completed2: {
+    width: 120,
+    height: 30,
+    borderRadius: 20,
+    backgroundColor: "#102027",
     justifyContent: "center",
     alignItems: "center",
   },

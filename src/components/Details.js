@@ -39,9 +39,15 @@ export default function Details({ project }) {
                 color="black"
                 style={styles.icon}
               />
-              <Text style={styles.listText}>
-                {project.acceptedWorker.length}/{project.totalWorker}
-              </Text>
+              {project.status === "Complete" ? (
+                <Text style={styles.listText}>
+                  {project.totalWorker}/{project.totalWorker}
+                </Text>
+              ) : (
+                <Text style={styles.listText}>
+                  {project.acceptedWorker.length}/{project.totalWorker}
+                </Text>
+              )}
             </View>
             <View style={styles.list}>
               <Ionicons

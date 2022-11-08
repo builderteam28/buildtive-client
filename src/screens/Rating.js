@@ -1,10 +1,23 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import { MaterialIcons, Ionicons } from "@expo/vector-icons";
+import { useDispatch } from "react-redux";
+import { createRatings } from "../store/actions/projectActions";
+import { useNavigation } from "@react-navigation/native";
 
-export default function Rating() {
+export default function Rating({ route }) {
   const [starRating, setStarRating] = useState(null);
-
+  const dispatch = useDispatch();
+  const navigation = useNavigation();
+  const handleSubmitRating = () => {
+    dispatch(
+      createRatings({ value: starRating, ProjectId: route.params.ProjectId })
+    ).then((data) => {
+      if (data) {
+        navigation.navigate("Projects");
+      }
+    });
+  };
   return (
     <>
       <View style={styles.container}>
@@ -74,7 +87,9 @@ export default function Rating() {
           />
         </View>
         {starRating && (
-          <TouchableOpacity style={styles.submitButton}>
+          <TouchableOpacity
+            onPress={() => handleSubmitRating()}
+            style={styles.submitButton}>
             <Text style={styles.submitText}>Submit</Text>
           </TouchableOpacity>
         )}

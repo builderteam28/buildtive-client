@@ -39,7 +39,6 @@ export const getMyProjects = () => {
           acceptedWorker,
         };
       });
-
       dispatch({
         type: USER_PROJECTS,
         payload: newData,
@@ -61,7 +60,7 @@ export const getProject = (ProjectId) => {
         headers: { access_token },
       });
       const acceptedWorker = data.ProjectWorkers.filter(
-        (el) => el.status === "Active"
+        (el) => el.status === "Accepted"
       );
       data.acceptedWorker = acceptedWorker;
       dispatch({
@@ -74,3 +73,56 @@ export const getProject = (ProjectId) => {
     }
   };
 };
+
+export const acceptWorker = (payload) => {
+  return async (dispatch, getState) => {
+    try {
+      const access_token = await AsyncStorage.getItem("access_token");
+      let { data } = await axios({
+        method: "PATCH",
+        url: globalBaseUrl + `/users/projects/accept/${payload.WorkerId}`,
+        headers: { access_token },
+        data: { ProjectId: payload.ProjectId },
+      });
+      
+      return data;
+    } catch (error) {
+      errorHandler(error);
+    }
+  };
+};
+
+export const declineWorker = (payload) => {
+  return async (dispatch, getState) => {
+    try {
+      const access_token = await AsyncStorage.getItem("access_token");
+      let { data } = await axios({
+        method: "PATCH",
+        url: globalBaseUrl + `/users/projects/decline/${payload.WorkerId}`,
+        headers: { access_token },
+        data: { ProjectId: payload.ProjectId },
+      });
+      
+      return data;
+    } catch (error) {
+      errorHandler(error);
+    }
+  };
+};
+
+export const createRatings = (payload) => {
+  return async (dispatch, getState) => {
+    try {
+      const access_token = await AsyncStorage.getItem("access_token");
+      let { data } = await axios({
+        method: "POST",
+        url: globalBaseUrl + `/users/projects/rate`,
+        headers: { access_token },
+        data: { value: payload.value, ProjectId: payload.ProjectId },
+      });
+      return data;
+    } catch (error) {
+      errorHandler(error);
+    }
+  };
+}
