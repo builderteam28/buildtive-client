@@ -6,10 +6,11 @@ import {
   View,
   Text,
   TextInput,
+  Image,
 } from "react-native";
 import { useDispatch } from "react-redux";
 import { loginUser } from "../store/actions/userActions";
-
+import { MaterialIcons } from "@expo/vector-icons";
 export const Login = () => {
   const [loginData, setLoginData] = useState({
     email: "",
@@ -37,28 +38,37 @@ export const Login = () => {
           </Text>
         </View>
         <View style={styles.inputContainer}>
-          <TextInput
-            selectionColor={"#FFC536"}
-            style={styles.textInput}
-            placeholder="Email"
-            onChangeText={(text) => handleChange("email", text)}
-          />
-          <TextInput
-            secureTextEntry={true}
-            selectionColor={"#FFC536"}
-            style={styles.textInput}
-            placeholder="Password"
-            onChangeText={(text) => handleChange("password", text)}
-          />
+          <View
+            style={styles.textInputContainer}>
+            <MaterialIcons name="email" size={20} color="black" />
+            <View style={{ justifyContent: "center", marginLeft: 6 }}>
+              <Text style={styles.titleInput}>Email</Text>
+              <TextInput
+                selectionColor={"#FFC536"}
+                style={styles.textInput}
+                placeholder="Email"
+                onChangeText={(text) => handleChange("email", text)}
+              />
+            </View>
+          </View>
+          <View
+            style={styles.textInputContainer}>
+            <MaterialIcons name="lock" size={20} color="black" />
+            <View style={{ justifyContent: "center", marginLeft: 6 }}>
+              <Text style={styles.titleInput}>Password</Text>
+              <TextInput
+                secureTextEntry={true}
+                selectionColor={"#FFC536"}
+                style={styles.textInput}
+                placeholder="Password"
+                onChangeText={(text) => handleChange("password", text)}
+              />
+            </View>
+          </View>
           <TouchableOpacity
             onPress={() => handleSubmit()}
             style={styles.loginButton}>
             <Text>Log In</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => navigation.navigate("HomeTabNavigation")}
-            style={styles.googleButton}>
-            <Text>Login with Google</Text>
           </TouchableOpacity>
           <View style={styles.registerContainer}>
             <Text style={{ fontSize: 16 }}>Don't have an account?</Text>
@@ -80,13 +90,23 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   inputContainer: { justifyContent: "center", alignItems: "center" },
+  textInputContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: 10,
+  },
   textInput: {
-    width: 300,
-    fontSize: 15,
+    width: 280,
+    height: 18,
+    fontSize: 14,
     borderBottomWidth: 1,
     borderBottomColor: "black",
     backgroundColor: "transparent",
-    marginBottom: 20,
+  },
+  titleInput: {
+    color: "gray",
+    fontSize: 10,
   },
   loginButton: {
     width: 250,

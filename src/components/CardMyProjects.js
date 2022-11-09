@@ -2,7 +2,11 @@ import { Text, View, TouchableOpacity, StyleSheet } from "react-native";
 import { FontAwesome, SimpleLineIcons, FontAwesome5 } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { useDispatch } from "react-redux";
-import { createPayment } from "../store/actions/projectActions";
+import {
+  addPayment,
+  createPayment,
+  updatePayment,
+} from "../store/actions/projectActions";
 
 export default function CardMyProjects({ project }) {
   const navigation = useNavigation();
@@ -11,9 +15,12 @@ export default function CardMyProjects({ project }) {
     return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
   };
   const handlePay = () => {
-    dispatch(createPayment({ cost: project.cost, ProjectId: project.id }))
+    dispatch(addPayment({ cost: project.cost, ProjectId: project.id }))
       .then((data) => {
         if (data) {
+          dispatch(
+            createPayment({ cost: project.cost, ProjectId: project.id })
+          );
           navigation.navigate("Payment", { transaction: data });
         }
       })
@@ -21,20 +28,28 @@ export default function CardMyProjects({ project }) {
         console.log(error);
       });
   };
+  const handleCompleteProject = () => {
+    dispatch(updatePayment({ cost: project.cost, ProjectId: project.id }));
+  };
   return (
     <View style={styles.container}>
       <View style={styles.content1}>
         <Text style={{ width: 200, fontSize: 18, fontWeight: "500" }}>
           {project.name}
         </Text>
-        {project.status === "Active" && (
-          <View style={styles.active}>
-            <Text style={styles.buttonText}>Active</Text>
-          </View>
-        )}
         {project.status === "Inactive" && (
           <View style={styles.inactive}>
             <Text style={styles.buttonText}>Inactive</Text>
+          </View>
+        )}
+        {project.status === "Active" && project.Payment === null && (
+          <View style={styles.wait}>
+            <Text style={styles.buttonText}>Waiting Payment</Text>
+          </View>
+        )}
+        {project.status === "Active" && project.Payment !== null && (
+          <View style={styles.active}>
+            <Text style={styles.buttonText}>Active</Text>
           </View>
         )}
         {project.status === "Completed" && (
@@ -92,42 +107,44 @@ export default function CardMyProjects({ project }) {
           <Text style={styles.buttonText}>Details</Text>
         </TouchableOpacity>
       </View>
-      {project.status === "Active" && (
-          <View style={styles.content2}>
-            <View style={styles.notPaid}>
-              <Text style={styles.buttonText}>Not Yet Paid</Text>
-            </View>
-            <TouchableOpacity
-              onPress={() => handlePay()}
-              style={styles.payButton}>
-              <Text style={styles.buttonText}>Pay</Text>
-            </TouchableOpacity>
+      {project.Payment === null && project.status === "Active" && (
+        <View style={styles.content2}>
+          <View style={styles.notPaid}>
+            <Text style={styles.buttonText}>Not Yet Paid</Text>
           </View>
-        )}
-      {project.status ==="Inactive" && (
-          <View style={{ justifyContent: "center", alignItems: "center" }}>
-            <View style={styles.waitButton}>
-              <Text style={styles.buttonText}>Waiting for workers</Text>
-            </View>
+          <TouchableOpacity
+            onPress={() => handlePay()}
+            style={styles.payButton}>
+            <Text style={styles.buttonText}>Pay</Text>
+          </TouchableOpacity>
+        </View>
+      )}
+      {project.status === "Inactive" && (
+        <View style={{ justifyContent: "center", alignItems: "center" }}>
+          <View style={styles.waitButton}>
+            <Text style={styles.buttonText}>Waiting for workers</Text>
           </View>
-        )}
-      {project.Payment !== null && project.status !== "Completed" && (
+        </View>
+      )}
+      {project.Payment !== null && project.status === "Active" && (
+        <TouchableOpacity
+          onPress={() => handleCompleteProject()}
+          style={{ justifyContent: "center", alignItems: "center" }}>
+          <View style={styles.completeButton}>
+            <Text style={styles.buttonText}>Complete Project</Text>
+          </View>
+        </TouchableOpacity>
+      )}
+      {project.Payment !== null && project.status === "Completed" && (
         <TouchableOpacity
           onPress={() =>
             navigation.navigate("Rating", { ProjectId: project.id })
           }
           style={{ justifyContent: "center", alignItems: "center" }}>
           <View style={styles.paidButton}>
-            <Text style={styles.buttonText}>Already Paid</Text>
+            <Text style={styles.buttonText}>Project Completed</Text>
           </View>
         </TouchableOpacity>
-      )}
-      {project.status === "Completed" && (
-        <View style={{ justifyContent: "center", alignItems: "center" }}>
-          <View style={styles.completed2}>
-            <Text style={styles.buttonText}>Completed</Text>
-          </View>
-        </View>
       )}
     </View>
   );
@@ -169,18 +186,18 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   completed: {
-    width: 80,
+    width: 100,
     height: 30,
     borderRadius: 20,
     backgroundColor: "#102027",
     justifyContent: "center",
     alignItems: "center",
   },
-  completed2: {
-    width: 120,
-    height: 30,
+  wait: {
+    width: 80,
+    height: 50,
     borderRadius: 20,
-    backgroundColor: "#102027",
+    backgroundColor: "#d50000",
     justifyContent: "center",
     alignItems: "center",
   },
@@ -197,6 +214,14 @@ const styles = StyleSheet.create({
     height: 30,
     borderRadius: 20,
     backgroundColor: "#102027",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  completeButton: {
+    width: 150,
+    height: 30,
+    borderRadius: 20,
+    backgroundColor: "#00c853",
     justifyContent: "center",
     alignItems: "center",
   },
@@ -224,5 +249,5 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  buttonText: { color: "white", fontWeight: "500" },
+  buttonText: { color: "white", fontWeight: "500", textAlign: "center" },
 });
