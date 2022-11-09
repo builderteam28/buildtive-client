@@ -2,7 +2,6 @@ import { useNavigation } from "@react-navigation/native";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-
 import { getLocation } from "../store/actions/userActions";
 import HeaderTab from "../components/HeaderTab";
 import ListCategories from "../components/ListCategories";

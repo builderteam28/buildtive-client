@@ -1,8 +1,13 @@
-import { useNavigation } from "@react-navigation/native";
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useDispatch } from "react-redux";
-import { acceptWorker, declineWorker } from "../store/actions/projectActions";
+import {
+  acceptWorker,
+  declineWorker,
+  getMyProjects,
+} from "../store/actions/projectActions";
+import React, { useEffect } from "react";
 export default function ProjectWorkerCard({ projectWorker }) {
   const navigation = useNavigation();
   const dispatch = useDispatch();

@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import { useDispatch } from "react-redux";
 import { createUser } from "../store/actions/userActions";
+import { MaterialIcons, Ionicons, Entypo } from "@expo/vector-icons";
 
 export const Register = () => {
   const [registerData, setRegisterData] = useState({
@@ -41,37 +42,67 @@ export const Register = () => {
           <Text style={styles.text}>User Account</Text>
         </View>
         <View style={styles.inputContainer}>
-          <TextInput
-            selectionColor={"#FFC536"}
-            style={styles.textInput}
-            placeholder="Email"
-            onChangeText={(text) => handleChange("email", text)}
-          />
-          <TextInput
-            secureTextEntry={true}
-            selectionColor={"#FFC536"}
-            style={styles.textInput}
-            placeholder="Password"
-            onChangeText={(text) => handleChange("password", text)}
-          />
-          <TextInput
-            selectionColor={"#FFC536"}
-            style={styles.textInput}
-            placeholder="Full Name"
-            onChangeText={(text) => handleChange("fullName", text)}
-          />
-          <TextInput
-            selectionColor={"#FFC536"}
-            style={styles.textInput}
-            placeholder="Phone Number"
-            onChangeText={(text) => handleChange("phoneNumber", text)}
-          />
-          <TextInput
-            selectionColor={"#FFC536"}
-            style={styles.textInput}
-            placeholder="Address"
-            onChangeText={(text) => handleChange("address", text)}
-          />
+          <View style={styles.textInputContainer}>
+            <MaterialIcons name="email" size={20} color="black" />
+            <View style={{ justifyContent: "center", marginLeft: 6 }}>
+              <Text style={styles.titleInput}>Email</Text>
+              <TextInput
+                selectionColor={"#FFC536"}
+                style={styles.textInput}
+                placeholder="Email"
+                onChangeText={(text) => handleChange("email", text)}
+              />
+            </View>
+          </View>
+          <View style={styles.textInputContainer}>
+            <MaterialIcons name="lock" size={20} color="black" />
+            <View style={{ justifyContent: "center", marginLeft: 6 }}>
+              <Text style={styles.titleInput}>Password</Text>
+              <TextInput
+                secureTextEntry={true}
+                selectionColor={"#FFC536"}
+                style={styles.textInput}
+                placeholder="Password"
+                onChangeText={(text) => handleChange("password", text)}
+              />
+            </View>
+          </View>
+          <View style={styles.textInputContainer}>
+            <Ionicons name="person" size={20} color="black" />
+            <View style={{ justifyContent: "center", marginLeft: 6 }}>
+              <Text style={styles.titleInput}>Full Name</Text>
+              <TextInput
+                selectionColor={"#FFC536"}
+                style={styles.textInput}
+                placeholder="Full Name"
+                onChangeText={(text) => handleChange("fullName", text)}
+              />
+            </View>
+          </View>
+          <View style={styles.textInputContainer}>
+            <MaterialIcons name="phone" size={20} color="black" />
+            <View style={{ justifyContent: "center", marginLeft: 6 }}>
+              <Text style={styles.titleInput}>Phone Number</Text>
+              <TextInput
+                selectionColor={"#FFC536"}
+                style={styles.textInput}
+                placeholder="Phone Number"
+                onChangeText={(text) => handleChange("phoneNumber", text)}
+              />
+            </View>
+          </View>
+          <View style={styles.textInputContainer}>
+            <Entypo name="address" size={24} color="black" />
+            <View style={{ justifyContent: "center", marginLeft: 6 }}>
+              <Text style={styles.titleInput}>Address</Text>
+              <TextInput
+                selectionColor={"#FFC536"}
+                style={styles.textInput}
+                placeholder="Address"
+                onChangeText={(text) => handleChange("address", text)}
+              />
+            </View>
+          </View>
           <TouchableOpacity
             onPress={() => handleSubmit()}
             style={styles.registerButton}>
@@ -96,13 +127,23 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   inputContainer: { justifyContent: "center", alignItems: "center" },
+  textInputContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: 16,
+  },
+  titleInput: {
+    color: "gray",
+    fontSize: 10,
+  },
   textInput: {
-    width: 300,
-    fontSize: 15,
+    width: 280,
+    height: 18,
+    fontSize: 14,
     borderBottomWidth: 1,
     borderBottomColor: "black",
     backgroundColor: "transparent",
-    marginBottom: 24,
   },
   registerButton: {
     width: 250,

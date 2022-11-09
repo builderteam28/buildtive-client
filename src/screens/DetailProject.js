@@ -5,6 +5,8 @@ import Details from "../components/Details";
 import MapDetail from "../components/MapDetail";
 import ProjectWorkers from "../components/ProjectWorkers";
 import { getProject } from "../store/actions/projectActions";
+import { Ionicons } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 
 export default function DetailProject({ route }) {
   const [isLoading, setIsLoading] = useState(true);
@@ -13,6 +15,7 @@ export default function DetailProject({ route }) {
   const changeShow = (input) => {
     setShow(input);
   };
+  const navigation = useNavigation();
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getProject(route.params.ProjectId)).then((data) => {
@@ -24,16 +27,22 @@ export default function DetailProject({ route }) {
   if (!isLoading) {
     return (
       <View style={styles.container}>
+        <TouchableOpacity
+          onPress={() => navigation.goBack()}
+          style={styles.backButton}>
+          <Ionicons name="arrow-back-sharp" size={26} color="white" />
+        </TouchableOpacity>
         <MapDetail project={project} />
         <View style={styles.containerDetail}>
           <View style={styles.switchContainer}>
             <TouchableOpacity onPress={() => changeShow("Details")}>
-              <Text style={[styles.button, { backgroundColor: "#e0e0e0" }]}>
+              <Text
+                style={show === "Details" ? styles.active : styles.inactive}>
                 Details
               </Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={() => changeShow("Lists")}>
-              <Text style={[styles.button, { backgroundColor: "#FFC536" }]}>
+              <Text style={show === "Lists" ? styles.active : styles.inactive}>
                 Project Applicants
               </Text>
             </TouchableOpacity>
@@ -54,8 +63,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  containerMap: { flex: 2 },
+  containerMap: { flex: 1 },
   containerDetail: {
+    flex: 1,
     paddingHorizontal: 10,
     marginTop: 20,
     backgroundColor: "white",
@@ -70,11 +80,32 @@ const styles = StyleSheet.create({
     marginBottom: 8,
     paddingHorizontal: 16,
   },
-  button: {
+  active: {
     width: 140,
     padding: 6,
     textAlign: "center",
     borderRadius: 20,
     fontWeight: "500",
+    backgroundColor: "#FFC536",
+  },
+  inactive: {
+    width: 140,
+    padding: 6,
+    textAlign: "center",
+    borderRadius: 20,
+    fontWeight: "500",
+    backgroundColor: "#e0e0e0",
+  },
+  backButton: {
+    position: "absolute",
+    left: 20,
+    top: 15,
+    zIndex: 100,
+    backgroundColor: "black",
+    borderRadius: 25,
+    height: 32,
+    width: 32,
+    justifyContent: "center",
+    alignItems: "center",
   },
 });

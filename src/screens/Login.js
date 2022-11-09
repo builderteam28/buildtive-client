@@ -24,13 +24,21 @@ export const Login = () => {
 
   const handleSubmit = () => {
     dispatch(loginUser(loginData)).then((data) => {
-      if (data) navigation.navigate("HomeTabNavigation");
+      if (data) navigation.replace("HomeTabNavigation");
     });
   };
 
   return (
     <View style={styles.container}>
-      <View style={{ paddingTop: 80 }}>
+      <View
+        style={{
+          paddingTop: "10%",
+          justifyContent: "center",
+          alignItems: "center",
+        }}>
+        <View style={styles.image}>
+          <Image source={require("../assets/logo.png")} resizeMode={"center"} />
+        </View>
         <View style={styles.loginTitle}>
           <Text style={styles.text}>Log in to</Text>
           <Text style={styles.text}>
@@ -38,8 +46,7 @@ export const Login = () => {
           </Text>
         </View>
         <View style={styles.inputContainer}>
-          <View
-            style={styles.textInputContainer}>
+          <View style={styles.textInputContainer}>
             <MaterialIcons name="email" size={20} color="black" />
             <View style={{ justifyContent: "center", marginLeft: 6 }}>
               <Text style={styles.titleInput}>Email</Text>
@@ -51,8 +58,7 @@ export const Login = () => {
               />
             </View>
           </View>
-          <View
-            style={styles.textInputContainer}>
+          <View style={styles.textInputContainer}>
             <MaterialIcons name="lock" size={20} color="black" />
             <View style={{ justifyContent: "center", marginLeft: 6 }}>
               <Text style={styles.titleInput}>Password</Text>
@@ -89,12 +95,18 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
+  image: {
+    width: 100,
+    height: 100,
+    justifyContent: "center",
+    alignItems: "center",
+  },
   inputContainer: { justifyContent: "center", alignItems: "center" },
   textInputContainer: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    marginBottom: 10,
+    marginBottom: 16,
   },
   textInput: {
     width: 280,
