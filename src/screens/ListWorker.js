@@ -27,7 +27,7 @@ export default function ListWorker({ route }) {
       </View>
       <View
         style={{
-          padding: 30,
+          padding: 20,
           flexDirection: "row",
           justifyContent: "space-between",
         }}>

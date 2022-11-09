@@ -84,7 +84,7 @@ export const acceptWorker = (payload) => {
         headers: { access_token },
         data: { ProjectId: payload.ProjectId },
       });
-
+      dispatch(getProject(payload.ProjectId))
       return data;
     } catch (error) {
       errorHandler(error);
@@ -102,7 +102,7 @@ export const declineWorker = (payload) => {
         headers: { access_token },
         data: { ProjectId: payload.ProjectId },
       });
-
+      dispatch(getProject(payload.ProjectId))
       return data;
     } catch (error) {
       errorHandler(error);
@@ -171,6 +171,7 @@ export const updatePayment = (payload) => {
         headers: { access_token },
         data: { cost: payload.cost },
       });
+      await dispatch(getMyProjects());
       return data;
     } catch (error) {
       errorHandler(error);

@@ -4,19 +4,13 @@ import { MaterialIcons, Ionicons } from "@expo/vector-icons";
 import { useDispatch } from "react-redux";
 import { createRatings } from "../store/actions/projectActions";
 import { useNavigation } from "@react-navigation/native";
-
 export default function Rating({ route }) {
   const [starRating, setStarRating] = useState(null);
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const handleSubmitRating = () => {
-    dispatch(
-      createRatings({ value: starRating, ProjectId: route.params.ProjectId })
-    ).then((data) => {
-      if (data) {
-        navigation.navigate("Projects");
-      }
-    });
+    dispatch(createRatings({ value: starRating, ProjectId: route.params.ProjectId }))
+      .then((data) => { if (data) {navigation.navigate("Projects")}});
   };
   return (
     <>
@@ -24,7 +18,7 @@ export default function Rating({ route }) {
         <View style={styles.containerHeading}>
           <Text style={styles.heading}>Let's rate your project</Text>
           <Text style={styles.heading2}>
-            How did you like the results from project NamaProject?
+            How did you like the results from project {route.params.name}?
           </Text>
           <Text style={styles.heading3}>
             (1 is disappointing, 5 is awesome)

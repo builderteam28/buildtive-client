@@ -4,9 +4,13 @@ import {
   SimpleLineIcons,
   FontAwesome5,
   Ionicons,
+  MaterialCommunityIcons,
 } from "@expo/vector-icons";
 
 export default function Details({ project }) {
+  const formatPrice = (price) => {
+    return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+  };
   if (project) {
     return (
       <>
@@ -15,9 +19,9 @@ export default function Details({ project }) {
           <Text style={styles.heading}>Category: {project.Category.name}</Text>
           <View style={styles.listContainer}>
             <View style={styles.list}>
-              <SimpleLineIcons
+              <MaterialCommunityIcons
                 name="clock"
-                size={16}
+                size={20}
                 color="black"
                 style={styles.icon}
               />
@@ -30,7 +34,9 @@ export default function Details({ project }) {
                 color="black"
                 style={styles.icon}
               />
-              <Text style={styles.listText}>{project.cost}</Text>
+              <Text style={styles.listText}>
+                Rp. {formatPrice(project.cost)},-
+              </Text>
             </View>
             <View style={styles.list}>
               <FontAwesome
@@ -41,11 +47,11 @@ export default function Details({ project }) {
               />
               {project.status === "Complete" ? (
                 <Text style={styles.listText}>
-                  {project.totalWorker}/{project.totalWorker}
+                  {project.totalWorker}/{project.totalWorker} person
                 </Text>
               ) : (
                 <Text style={styles.listText}>
-                  {project.acceptedWorker.length}/{project.totalWorker}
+                  {project.acceptedWorker.length}/{project.totalWorker} person
                 </Text>
               )}
             </View>

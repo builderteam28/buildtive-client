@@ -9,11 +9,17 @@ import {
 } from "react-native";
 import * as Location from "expo-location";
 import MapView from "react-native-maps";
-import { FontAwesome5 } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import Dropdown from "../components/Dropdown";
 import { useDispatch } from "react-redux";
 import { createProject } from "../store/actions/projectActions";
+import {
+  MaterialIcons,
+  FontAwesome5,
+  MaterialCommunityIcons,
+  Entypo,
+  FontAwesome,
+} from "@expo/vector-icons";
 
 export default function FormProject() {
   const [step, setStep] = useState(1);
@@ -154,45 +160,82 @@ export default function FormProject() {
             <Text style={styles.textBuildHub}>Project</Text>
           </View>
           <View style={styles.inputContainer}>
-            <TextInput
-              selectionColor={"#FFC536"}
-              style={styles.textInput}
-              placeholder="Project Name"
-              onChangeText={(text) => handleChange("name", text)}
-            />
-            <TextInput
-              selectionColor={"#FFC536"}
-              style={styles.textInput}
-              placeholder="Description"
-              onChangeText={(text) => handleChange("description", text)}
-            />
-            <TextInput
-              selectionColor={"#FFC536"}
-              style={styles.textInput}
-              placeholder="Address"
-              onChangeText={(text) => handleChange("address", text)}
-            />
-            <TextInput
-              selectionColor={"#FFC536"}
-              style={styles.textInput}
-              placeholder="Day of works"
-              keyboardType="number-pad"
-              onChangeText={(text) => handleChange("tenor", text)}
-            />
-            <TextInput
-              selectionColor={"#FFC536"}
-              style={styles.textInput}
-              placeholder="Total Worker"
-              keyboardType="number-pad"
-              onChangeText={(text) => handleChange("totalWorker", text)}
-            />
-            <TextInput
-              selectionColor={"#FFC536"}
-              style={styles.textInput}
-              placeholder="Cost"
-              keyboardType="number-pad"
-              onChangeText={(text) => handleChange("cost", text)}
-            />
+            <View style={styles.textInputContainer}>
+              <FontAwesome5 name="house-damage" size={18} color="black" />
+              <View style={{ justifyContent: "center", marginLeft: 6 }}>
+                <Text style={styles.titleInput}>Project Name</Text>
+                <TextInput
+                  selectionColor={"#FFC536"}
+                  style={styles.textInput}
+                  placeholder="Project Name"
+                  onChangeText={(text) => handleChange("name", text)}
+                />
+              </View>
+            </View>
+            <View style={styles.textInputContainer}>
+              <MaterialCommunityIcons name="text-box" size={20} color="black" />
+              <View style={{ justifyContent: "center", marginLeft: 6 }}>
+                <Text style={styles.titleInput}>Description</Text>
+                <TextInput
+                  selectionColor={"#FFC536"}
+                  style={styles.textInput}
+                  placeholder="Description"
+                  onChangeText={(text) => handleChange("description", text)}
+                />
+              </View>
+            </View>
+            <View style={styles.textInputContainer}>
+              <Entypo name="address" size={20} color="black" />
+              <View style={{ justifyContent: "center", marginLeft: 6 }}>
+                <Text style={styles.titleInput}>Address</Text>
+                <TextInput
+                  selectionColor={"#FFC536"}
+                  style={styles.textInput}
+                  placeholder="Address"
+                  onChangeText={(text) => handleChange("address", text)}
+                />
+              </View>
+            </View>
+            <View style={styles.textInputContainer}>
+              <MaterialCommunityIcons name="clock" size={20} color="black" />
+              <View style={{ justifyContent: "center", marginLeft: 6 }}>
+                <Text style={styles.titleInput}>Day of works</Text>
+                <TextInput
+                  selectionColor={"#FFC536"}
+                  style={styles.textInput}
+                  placeholder="Day of works"
+                  keyboardType="number-pad"
+                  onChangeText={(text) => handleChange("tenor", text)}
+                />
+              </View>
+            </View>
+            <View style={styles.textInputContainer}>
+              <FontAwesome name="group" size={18} color="black" />
+              <View style={{ justifyContent: "center", marginLeft: 6 }}>
+                <Text style={styles.titleInput}>Total Worker</Text>
+                <TextInput
+                  selectionColor={"#FFC536"}
+                  style={styles.textInput}
+                  placeholder="Total Worker"
+                  keyboardType="number-pad"
+                  onChangeText={(text) => handleChange("totalWorker", text)}
+                />
+              </View>
+            </View>
+            <View style={styles.textInputContainer}>
+              <FontAwesome5 name="money-bill" size={16} color="black" />
+              <View style={{ justifyContent: "center", marginLeft: 6 }}>
+                <Text style={styles.titleInput}>Total Worker</Text>
+                <TextInput
+                  selectionColor={"#FFC536"}
+                  style={styles.textInput}
+                  placeholder="Cost"
+                  keyboardType="number-pad"
+                  onChangeText={(text) => handleChange("cost", text)}
+                />
+              </View>
+            </View>
+
             <View style={styles.inputContainer}>
               <Dropdown
                 data={categories}
@@ -263,13 +306,23 @@ const styles = StyleSheet.create({
     fontWeight: "600",
   },
   inputContainer: { justifyContent: "center", alignItems: "center" },
+  textInputContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: 16,
+  },
   textInput: {
-    width: 300,
-    fontSize: 15,
+    width: 280,
+    height: 18,
+    fontSize: 14,
     borderBottomWidth: 1,
     borderBottomColor: "black",
     backgroundColor: "transparent",
-    marginBottom: 24,
+  },
+  titleInput: {
+    color: "gray",
+    fontSize: 10,
   },
   createButton: {
     ...baseButton,

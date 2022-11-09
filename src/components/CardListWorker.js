@@ -1,29 +1,28 @@
 import { useNavigation } from "@react-navigation/native";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { Ionicons, Octicons, MaterialIcons } from "@expo/vector-icons";
-
+import { MaterialIcons } from "@expo/vector-icons";
+import { SvgUri } from "react-native-svg";
+import { useEffect, useState } from "react";
 export default function CardListWorker({ worker }) {
+  const [uri, setUri] = useState("");
   const navigation = useNavigation();
+  useEffect(() => {
+    const slug = worker.Worker.fullName.replace(" ", "-");
+    setUri(`https://avatars.dicebear.com/api/micah/${slug}.svg`);
+  }, [uri]);
   return (
     <TouchableOpacity
       onPress={() =>
         navigation.navigate("DetailWorker", { WorkerId: worker.id })
       }
       style={styles.card}>
-      <Octicons
-        name="feed-person"
-        size={54}
-        color="black"
-        style={{ marginBottom: 8 }}
-      />
+      <View style={styles.svg}>
+        <SvgUri width="100%" height="100%" uri={uri} />
+      </View>
       <Text>{worker.Worker.fullName}</Text>
       <View style={{ flexDirection: "row", alignItems: "center" }}>
         <MaterialIcons name="location-pin" size={14} color="black" />
         <Text style={{ fontSize: 12 }}>{worker.Worker.address}</Text>
-      </View>
-      <View style={{ flexDirection: "row", alignItems: "center" }}>
-        <Ionicons name="star" size={12} color="black" />
-        <Text style={{ fontSize: 12 }}>4.9</Text>
       </View>
     </TouchableOpacity>
   );
@@ -31,12 +30,23 @@ export default function CardListWorker({ worker }) {
 
 const styles = StyleSheet.create({
   card: {
-    height: 140,
-    width: 140,
-    padding: 6,
+    height: 150,
+    width: 150,
+    padding: 10,
     borderRadius: 14,
     backgroundColor: "#FFC536",
     alignItems: "center",
     margin: "4%",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  svg: {
+    width: 80,
+    height: 80,
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 100,
+    overflow: "hidden",
+    marginBottom: 10,
   },
 });

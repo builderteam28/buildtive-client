@@ -14,7 +14,6 @@ export default function DetailWorker({ route }) {
   useEffect(() => {
     dispatch(getWorker(route.params.WorkerId));
   }, []);
-
   if (worker.WorkerCategories && worker.Ratings) {
     return (
       <View style={styles.container}>
@@ -36,40 +35,30 @@ export default function DetailWorker({ route }) {
             {worker.phoneNumber}
           </Text>
         </View>
-        <View style={styles.containerRating}>
-          <View>
-            <View style={{ flexDirection: "row" }}>
-              <Ionicons
-                name="star"
-                size={14}
-                color="gold"
-                style={{ alignSelf: "center", marginRight: 1 }}
-              />
-              <Text style={{ fontSize: 14 }}>
-                {worker.Ratings.ratings ? worker.Ratings.ratings : 0}
-              </Text>
+        <View
+            style={{
+              flexDirection: 'column',
+              justifyContent: 'center',
+              padding: 20,
+              borderRadius: 10,
+              backgroundColor: "gray",
+              marginBottom: 30,
+            }}
+          >
+            <View>
+              <View style={{ alignItems: 'center' }}>
+                <Text style={[styles.text]}>Rating Overview</Text>
+              </View>
+              <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
+                <Text style={[styles.text]}>
+                  <Text style={([styles.text], { fontSize: 48 })}>{worker.Ratings[0] ? worker.Ratings[0].ratings : 0}</Text>/5
+                </Text>
+              </View>
             </View>
-            <View style={{ justifyContent: "center" }}>
-              <Text style={{ fontSize: 14 }}>Ratings</Text>
-            </View>
-          </View>
-          <View style={{ justifyContent: "center", alignItems: "center" }}>
-            <View style={{ flexDirection: "row" }}>
-              <MaterialIcons
-                name="rate-review"
-                size={14}
-                color="black"
-                style={{ alignSelf: "flex-end", marginRight: 1 }}
-              />
-              <Text style={{ fontSize: 14 }}>
-                {worker.Ratings.reviews ? worker.Ratings.reviews : 0}
-              </Text>
-            </View>
-            <View style={{ justifyContent: "center" }}>
-              <Text style={{ fontSize: 14 }}>Reviews</Text>
+            <View style={{ alignItems: 'center' }}>
+              <Text style={styles.text}>{worker.Ratings[0] ? worker.Ratings[0].reviews : 0} Ratings</Text>
             </View>
           </View>
-        </View>
       </View>
     );
   }
@@ -93,5 +82,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 30,
     paddingVertical: 10,
     borderRadius: 10,
+  },
+  text: {
+    fontSize: 15,
+    color: "white"
   },
 });
