@@ -30,7 +30,6 @@ export const getMyProjects = () => {
         url: globalBaseUrl + "/users/projects",
         headers: { access_token },
       });
-      console.log(data)
       const newData = data.map((el) => {
         const acceptedWorker = el.ProjectWorkers.filter(
           (e) => e.status === "Accepted"
@@ -128,7 +127,7 @@ export const createRatings = (payload) => {
   };
 };
 
-export const createPayment = (payload) => {
+export const addPayment = (payload) => {
   return async (dispatch, getState) => {
     try {
       const access_token = await AsyncStorage.getItem("access_token");
@@ -137,6 +136,40 @@ export const createPayment = (payload) => {
         url: globalBaseUrl + `/payments`,
         headers: { access_token },
         data: { cost: payload.cost, ProjectId: payload.ProjectId },
+      });
+      return data;
+    } catch (error) {
+      errorHandler(error);
+    }
+  };
+};
+
+export const createPayment = (payload) => {
+  return async (dispatch, getState) => {
+    try {
+      const access_token = await AsyncStorage.getItem("access_token");
+      let { data } = await axios({
+        method: "POST",
+        url: globalBaseUrl + `/payments/${payload.ProjectId}`,
+        headers: { access_token },
+        data: { cost: payload.cost },
+      });
+      return data;
+    } catch (error) {
+      errorHandler(error);
+    }
+  };
+};
+
+export const updatePayment = (payload) => {
+  return async (dispatch, getState) => {
+    try {
+      const access_token = await AsyncStorage.getItem("access_token");
+      let { data } = await axios({
+        method: "PUT",
+        url: globalBaseUrl + `/payments/${payload.ProjectId}`,
+        headers: { access_token },
+        data: { cost: payload.cost },
       });
       return data;
     } catch (error) {
