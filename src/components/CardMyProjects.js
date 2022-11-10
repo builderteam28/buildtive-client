@@ -10,6 +10,7 @@ import { addPayment, updatePayment } from "../store/actions/projectActions";
 import { useEffect, useState } from "react";
 import ModalPayment from "./ModalPayment";
 import ModalCompleteProject from "./ModalCompleteProject";
+import { colors, fonts } from "../helpers/theme";
 
 export default function CardMyProjects({ project }) {
   const [totalPayment, setTotalPayment] = useState("");
@@ -48,7 +49,7 @@ export default function CardMyProjects({ project }) {
   };
 
   const handleCompleteProject = () => {
-    setModalPayment(!modalPayment);
+    setModalComplete(!modalComplete);
     dispatch(updatePayment({ cost: project.cost, ProjectId: project.id }));
   };
 
@@ -63,7 +64,7 @@ export default function CardMyProjects({ project }) {
     return (
       <View style={styles.container}>
         <View style={styles.content1}>
-          <Text style={{ width: 200, fontSize: 18, fontWeight: "500" }}>
+          <Text style={{ width: 200, fontSize: 18, fontFamily: fonts.bold }}>
             {project.name}
           </Text>
           {project.status === "Inactive" && (
@@ -72,8 +73,8 @@ export default function CardMyProjects({ project }) {
             </View>
           )}
           {project.status === "Active" && project.Payment === null && (
-            <View style={styles.wait}>
-              <Text style={styles.buttonText}>Waiting Payment</Text>
+            <View style={styles.inactive}>
+              <Text style={styles.buttonText}>Inactive</Text>
             </View>
           )}
           {project.status === "Active" && project.Payment !== null && (
@@ -92,19 +93,21 @@ export default function CardMyProjects({ project }) {
             <MaterialCommunityIcons
               name="clock"
               size={24}
-              color="black"
+              color={colors.black}
               style={{ marginRight: 20 }}
             />
-            <Text style={{ fontSize: 18 }}>{project.tenor} day</Text>
+            <Text style={{ fontSize: 18, fontFamily: fonts.regular }}>
+              {project.tenor} day
+            </Text>
           </View>
           <View style={styles.description}>
             <FontAwesome5
               name="money-bill"
               size={24}
-              color="black"
+              color={colors.black}
               style={{ marginRight: 14 }}
             />
-            <Text style={{ fontSize: 18 }}>
+            <Text style={{ fontSize: 18, fontFamily: fonts.regular }}>
               Rp. {formatPrice(project.cost)},-
             </Text>
           </View>
@@ -112,22 +115,24 @@ export default function CardMyProjects({ project }) {
             <FontAwesome
               name="group"
               size={24}
-              color="black"
+              color={colors.black}
               style={{ marginRight: 18 }}
             />
             {project.status === "Completed" ? (
-              <Text style={{ fontSize: 18 }}>
+              <Text style={{ fontSize: 18, fontFamily: fonts.regular }}>
                 {project.totalWorker}/{project.totalWorker} person
               </Text>
             ) : (
-              <Text style={{ fontSize: 18 }}>
+              <Text style={{ fontSize: 18, fontFamily: fonts.regular }}>
                 {project.acceptedWorker}/{project.totalWorker} person
               </Text>
             )}
           </View>
         </View>
         <View style={styles.content2}>
-          <Text style={{ fontSize: 18 }}>{project.Category.name}</Text>
+          <Text style={{ fontSize: 18, fontFamily: fonts.semiBold }}>
+            {project.Category.name}
+          </Text>
           <TouchableOpacity
             onPress={() =>
               navigation.navigate("DetailProject", { ProjectId: project.id })
@@ -164,20 +169,22 @@ export default function CardMyProjects({ project }) {
             </View>
           </TouchableOpacity>
         )}
-        {project.Payment !== null && project.Ratings.length === 0 && (
-          <TouchableOpacity
-            onPress={() =>
-              navigation.navigate("Rating", {
-                ProjectId: project.id,
-                name: project.name,
-              })
-            }
-            style={{ justifyContent: "center", alignItems: "center" }}>
-            <View style={styles.paidButton}>
-              <Text style={styles.buttonText}>Rate this Project</Text>
-            </View>
-          </TouchableOpacity>
-        )}
+        {project.Payment !== null &&
+          project.Ratings.length === 0 &&
+          project.status === "Completed" && (
+            <TouchableOpacity
+              onPress={() =>
+                navigation.navigate("Rating", {
+                  ProjectId: project.id,
+                  name: project.name,
+                })
+              }
+              style={{ justifyContent: "center", alignItems: "center" }}>
+              <View style={styles.paidButton}>
+                <Text style={styles.buttonText}>Rate this Project</Text>
+              </View>
+            </TouchableOpacity>
+          )}
         <ModalPayment
           modalPayment={modalPayment}
           closeModalPayment={closeModalPayment}
@@ -197,7 +204,7 @@ export default function CardMyProjects({ project }) {
 const styles = StyleSheet.create({
   container: {
     padding: 20,
-    backgroundColor: "#FFC536",
+    backgroundColor: colors.primary,
     borderRadius: 20,
     marginBottom: "10%",
   },
@@ -216,40 +223,32 @@ const styles = StyleSheet.create({
   active: {
     width: 80,
     height: 30,
-    borderRadius: 20,
-    backgroundColor: "#00c853",
+    borderRadius: 5,
+    backgroundColor: colors.green,
     justifyContent: "center",
     alignItems: "center",
   },
   inactive: {
     width: 80,
     height: 30,
-    borderRadius: 20,
-    backgroundColor: "#d50000",
+    borderRadius: 5,
+    backgroundColor: colors.red,
     justifyContent: "center",
     alignItems: "center",
   },
   completed: {
     width: 100,
     height: 30,
-    borderRadius: 20,
-    backgroundColor: "#102027",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  wait: {
-    width: 80,
-    height: 50,
-    borderRadius: 20,
-    backgroundColor: "#d50000",
+    borderRadius: 5,
+    backgroundColor: colors.black,
     justifyContent: "center",
     alignItems: "center",
   },
   waitButton: {
     width: 150,
     height: 30,
-    borderRadius: 20,
-    backgroundColor: "#102027",
+    borderRadius: 5,
+    backgroundColor: colors.gray,
     justifyContent: "center",
     alignItems: "center",
   },
@@ -257,7 +256,7 @@ const styles = StyleSheet.create({
     width: 80,
     height: 30,
     borderRadius: 20,
-    backgroundColor: "#102027",
+    backgroundColor: colors.navy,
     justifyContent: "center",
     alignItems: "center",
   },
@@ -265,7 +264,7 @@ const styles = StyleSheet.create({
     width: 150,
     height: 30,
     borderRadius: 20,
-    backgroundColor: "#00c853",
+    backgroundColor: colors.green,
     justifyContent: "center",
     alignItems: "center",
   },
@@ -273,15 +272,15 @@ const styles = StyleSheet.create({
     width: 120,
     height: 30,
     borderRadius: 20,
-    backgroundColor: "#00c853",
+    backgroundColor: colors.green,
     justifyContent: "center",
     alignItems: "center",
   },
   notPaid: {
     width: 120,
     height: 30,
-    borderRadius: 20,
-    backgroundColor: "#d50000",
+    borderRadius: 5,
+    backgroundColor: colors.red,
     justifyContent: "center",
     alignItems: "center",
   },
@@ -289,9 +288,13 @@ const styles = StyleSheet.create({
     width: 80,
     height: 30,
     borderRadius: 20,
-    backgroundColor: "#102027",
+    backgroundColor: colors.navy,
     justifyContent: "center",
     alignItems: "center",
   },
-  buttonText: { color: "white", fontWeight: "500", textAlign: "center" },
+  buttonText: {
+    color: colors.white,
+    fontFamily: fonts.medium,
+    textAlign: "center",
+  },
 });

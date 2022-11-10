@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import { useState } from "react";
 import { useEffect } from "react";
+import { colors } from "../helpers/theme";
 // import { theme } from '../helpers/theme';
 
 export default function MapDetail({ project }) {
@@ -49,7 +50,7 @@ export default function MapDetail({ project }) {
               latitude: project.lat,
               longitude: project.long,
             }}
-            pinColor="black"></Marker>
+            pinColor={colors.black}></Marker>
         </MapView>
       </View>
     );

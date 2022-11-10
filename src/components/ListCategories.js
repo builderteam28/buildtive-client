@@ -2,6 +2,7 @@ import { useNavigation } from "@react-navigation/native";
 import { StyleSheet, Text, View } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { MaterialIcons, MaterialCommunityIcons } from "@expo/vector-icons";
+import { colors, fonts } from "../helpers/theme";
 export default function ListCategories() {
   const navigation = useNavigation();
   return (
@@ -15,8 +16,8 @@ export default function ListCategories() {
             })
           }
           style={styles.card}>
-          <MaterialIcons name="house" size={60} color="black" />
-          <Text>Build Home</Text>
+          <MaterialIcons name="house" size={60} color={colors.black} />
+          <Text style={{ fontFamily: fonts.medium }}>Build Home</Text>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() =>
@@ -29,17 +30,20 @@ export default function ListCategories() {
           <MaterialCommunityIcons
             name="home-lightning-bolt"
             size={60}
-            color="black"
+            color={colors.black}
           />
-          <Text>Electricity</Text>
+          <Text style={{ fontFamily: fonts.medium }}>Electricity</Text>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() =>
-            navigation.navigate("ListWorker", { CategoryId: 3, name: "Toilet" })
+            navigation.navigate("ListWorker", {
+              CategoryId: 3,
+              name: "Carpentry",
+            })
           }
           style={styles.card}>
-          <MaterialCommunityIcons name="toilet" size={60} color="black" />
-          <Text>Toilet</Text>
+          <MaterialIcons name="carpenter" size={60} color={colors.black} />
+          <Text style={{ fontFamily: fonts.medium }}>Carpentry</Text>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() =>
@@ -49,9 +53,9 @@ export default function ListCategories() {
           <MaterialCommunityIcons
             name="hammer-screwdriver"
             size={60}
-            color="black"
+            color={colors.black}
           />
-          <Text>Repair</Text>
+          <Text style={{ fontFamily: fonts.medium }}>Repair</Text>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() =>
@@ -61,8 +65,8 @@ export default function ListCategories() {
             })
           }
           style={styles.card}>
-          <MaterialIcons name="format-paint" size={60} color="black" />
-          <Text>Painting</Text>
+          <MaterialIcons name="format-paint" size={60} color={colors.black} />
+          <Text style={{ fontFamily: fonts.medium }}>Painting</Text>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() =>
@@ -72,8 +76,8 @@ export default function ListCategories() {
             })
           }
           style={styles.card}>
-          <MaterialIcons name="plumbing" size={60} color="black" />
-          <Text>Plumbing</Text>
+          <MaterialIcons name="plumbing" size={60} color={colors.black} />
+          <Text style={{ fontFamily: fonts.medium }}>Plumbing</Text>
         </TouchableOpacity>
       </View>
     </>
@@ -91,7 +95,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   card: {
-    backgroundColor: "#FFC536",
+    backgroundColor: colors.primary,
     height: 100,
     width: 100,
     borderRadius: 25,

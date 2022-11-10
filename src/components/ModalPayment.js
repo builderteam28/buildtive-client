@@ -1,5 +1,6 @@
 import React from "react";
 import { Modal, StyleSheet, Text, Pressable, View } from "react-native";
+import { colors, fonts } from "../helpers/theme";
 export default function ModalPayment({
   modalPayment,
   closeModalPayment,
@@ -56,7 +57,7 @@ const styles = StyleSheet.create({
   },
   modalView: {
     margin: 20,
-    backgroundColor: "white",
+    backgroundColor: colors.white,
     borderRadius: 20,
     padding: 35,
     alignItems: "center",
@@ -79,20 +80,20 @@ const styles = StyleSheet.create({
     width: 70,
   },
   buttonSubmit: {
-    backgroundColor: "#00c853",
+    backgroundColor: colors.green,
   },
   buttonCancel: {
-    backgroundColor: "#d50000",
+    backgroundColor: colors.red,
   },
   textStyle: {
-    color: "white",
-    fontWeight: "bold",
+    color: colors.white,
     textAlign: "center",
+    fontFamily: fonts.bold,
   },
   modalText: {
     marginBottom: 15,
     textAlign: "center",
     fontSize: 14,
-    fontWeight: "500",
+    fontFamily: fonts.semiBold,
   },
 });

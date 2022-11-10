@@ -4,6 +4,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
 import Home from "../screens/Home";
 import MyProjects from "../screens/MyProjects";
+import { colors } from "../helpers/theme";
 const Tab = createBottomTabNavigator();
 
 export default function HomeTabNavigation() {
@@ -26,8 +27,8 @@ export default function HomeTabNavigation() {
             </View>
           );
         },
-        tabBarActiveTintColor: "black",
-        tabBarInactiveTintColor: "black",
+        tabBarActiveTintColor: colors.black,
+        tabBarInactiveTintColor: colors.black,
         tabBarShowLabel: false,
         tabBarStyle: {
           ...styles.tabBar,

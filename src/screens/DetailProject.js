@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { ActivityIndicator, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import Details from "../components/Details";
 import MapDetail from "../components/MapDetail";
@@ -7,6 +7,7 @@ import ProjectWorkers from "../components/ProjectWorkers";
 import { getProject } from "../store/actions/projectActions";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
+import { colors, fonts } from "../helpers/theme";
 
 export default function DetailProject({ route }) {
   const [isLoading, setIsLoading] = useState(true);
@@ -24,13 +25,20 @@ export default function DetailProject({ route }) {
       }
     });
   }, []);
+  if (isLoading) {
+    return (
+      <View style={styles.loader}>
+        <ActivityIndicator size="large" color={colors.primary} />
+      </View>
+    );
+  }
   if (!isLoading) {
     return (
       <View style={styles.container}>
         <TouchableOpacity
           onPress={() => navigation.goBack()}
           style={styles.backButton}>
-          <Ionicons name="arrow-back-sharp" size={26} color="white" />
+          <Ionicons name="arrow-back-sharp" size={26} color={colors.white} />
         </TouchableOpacity>
         <MapDetail project={project} />
         <View style={styles.containerDetail}>
@@ -68,7 +76,7 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: 10,
     marginTop: 20,
-    backgroundColor: "white",
+    backgroundColor: colors.white,
     height: "60%",
     padding: "5%",
     borderTopRightRadius: 25,
@@ -86,7 +94,8 @@ const styles = StyleSheet.create({
     textAlign: "center",
     borderRadius: 20,
     fontWeight: "500",
-    backgroundColor: "#FFC536",
+    backgroundColor: colors.primary,
+    fontFamily: fonts.semiBold,
   },
   inactive: {
     width: 140,
@@ -94,18 +103,25 @@ const styles = StyleSheet.create({
     textAlign: "center",
     borderRadius: 20,
     fontWeight: "500",
-    backgroundColor: "#e0e0e0",
+    backgroundColor: colors.gray,
+    fontFamily: fonts.semiBold,
+    color: colors.white,
   },
   backButton: {
     position: "absolute",
     left: 20,
     top: 15,
     zIndex: 100,
-    backgroundColor: "black",
+    backgroundColor: colors.black,
     borderRadius: 25,
     height: 32,
     width: 32,
     justifyContent: "center",
     alignItems: "center",
+  },
+  loader: {
+    position: "absolute",
+    alignSelf: "center",
+    top: "46.5%",
   },
 });

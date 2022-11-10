@@ -1,5 +1,5 @@
 import { useNavigation } from "@react-navigation/native";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   StyleSheet,
   TouchableOpacity,
@@ -10,6 +10,7 @@ import {
 import { useDispatch } from "react-redux";
 import { createUser } from "../store/actions/userActions";
 import { MaterialIcons, Ionicons, Entypo } from "@expo/vector-icons";
+import { colors, fonts } from "../helpers/theme";
 
 export const Register = () => {
   const [registerData, setRegisterData] = useState({
@@ -43,11 +44,11 @@ export const Register = () => {
         </View>
         <View style={styles.inputContainer}>
           <View style={styles.textInputContainer}>
-            <MaterialIcons name="email" size={20} color="black" />
+            <MaterialIcons name="email" size={20} color={colors.black} />
             <View style={{ justifyContent: "center", marginLeft: 6 }}>
               <Text style={styles.titleInput}>Email</Text>
               <TextInput
-                selectionColor={"#FFC536"}
+                selectionColor={colors.primary}
                 style={styles.textInput}
                 placeholder="Email"
                 onChangeText={(text) => handleChange("email", text)}
@@ -55,12 +56,12 @@ export const Register = () => {
             </View>
           </View>
           <View style={styles.textInputContainer}>
-            <MaterialIcons name="lock" size={20} color="black" />
+            <MaterialIcons name="lock" size={20} color={colors.black} />
             <View style={{ justifyContent: "center", marginLeft: 6 }}>
               <Text style={styles.titleInput}>Password</Text>
               <TextInput
                 secureTextEntry={true}
-                selectionColor={"#FFC536"}
+                selectionColor={colors.primary}
                 style={styles.textInput}
                 placeholder="Password"
                 onChangeText={(text) => handleChange("password", text)}
@@ -68,11 +69,11 @@ export const Register = () => {
             </View>
           </View>
           <View style={styles.textInputContainer}>
-            <Ionicons name="person" size={20} color="black" />
+            <Ionicons name="person" size={20} color={colors.black} />
             <View style={{ justifyContent: "center", marginLeft: 6 }}>
               <Text style={styles.titleInput}>Full Name</Text>
               <TextInput
-                selectionColor={"#FFC536"}
+                selectionColor={colors.primary}
                 style={styles.textInput}
                 placeholder="Full Name"
                 onChangeText={(text) => handleChange("fullName", text)}
@@ -80,11 +81,11 @@ export const Register = () => {
             </View>
           </View>
           <View style={styles.textInputContainer}>
-            <MaterialIcons name="phone" size={20} color="black" />
+            <MaterialIcons name="phone" size={20} color={colors.black} />
             <View style={{ justifyContent: "center", marginLeft: 6 }}>
               <Text style={styles.titleInput}>Phone Number</Text>
               <TextInput
-                selectionColor={"#FFC536"}
+                selectionColor={colors.primary}
                 style={styles.textInput}
                 placeholder="Phone Number"
                 onChangeText={(text) => handleChange("phoneNumber", text)}
@@ -92,11 +93,11 @@ export const Register = () => {
             </View>
           </View>
           <View style={styles.textInputContainer}>
-            <Entypo name="address" size={24} color="black" />
+            <Entypo name="address" size={24} color={colors.black} />
             <View style={{ justifyContent: "center", marginLeft: 6 }}>
               <Text style={styles.titleInput}>Address</Text>
               <TextInput
-                selectionColor={"#FFC536"}
+                selectionColor={colors.primary}
                 style={styles.textInput}
                 placeholder="Address"
                 onChangeText={(text) => handleChange("address", text)}
@@ -106,12 +107,14 @@ export const Register = () => {
           <TouchableOpacity
             onPress={() => handleSubmit()}
             style={styles.registerButton}>
-            <Text>Create new Account</Text>
+            <Text style={{ fontFamily: fonts.regular }}>
+              Create new Account
+            </Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => navigation.navigate("Login")}
             style={styles.backButton}>
-            <Text>Back to Login</Text>
+            <Text style={{ fontFamily: fonts.regular }}>Back to Login</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -134,7 +137,7 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   titleInput: {
-    color: "gray",
+    color: colors.gray,
     fontSize: 10,
   },
   textInput: {
@@ -142,35 +145,36 @@ const styles = StyleSheet.create({
     height: 18,
     fontSize: 14,
     borderBottomWidth: 1,
-    borderBottomColor: "black",
+    borderBottomColor: colors.black,
     backgroundColor: "transparent",
+    fontFamily: fonts.medium,
   },
   registerButton: {
     width: 250,
     paddingVertical: 10,
-    backgroundColor: "#FFC536",
+    backgroundColor: colors.primary,
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 20,
     borderWidth: 1,
-    borderColor: "#FFC536",
+    borderColor: colors.primary,
     marginBottom: 15,
     marginTop: 24,
   },
   backButton: {
     width: 250,
     paddingVertical: 10,
-    backgroundColor: "white",
+    backgroundColor: colors.white,
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 20,
     borderWidth: 1,
   },
-  text: { fontSize: 36, fontWeight: "500", textAlign: "center" },
+  text: { fontSize: 36, fontFamily: fonts.medium, textAlign: "center" },
   textBuildHub: {
     fontSize: 36,
-    fontWeight: "500",
     textAlign: "center",
-    color: "#FFC536",
+    color: colors.primary,
+    fontFamily: fonts.medium,
   },
 });

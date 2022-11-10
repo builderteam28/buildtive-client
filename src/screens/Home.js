@@ -5,6 +5,7 @@ import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { getLocation } from "../store/actions/userActions";
 import HeaderTab from "../components/HeaderTab";
 import ListCategories from "../components/ListCategories";
+import { colors, fonts } from "../helpers/theme";
 export default function Home() {
   const navigation = useNavigation();
   const dispatch = useDispatch();
@@ -16,7 +17,12 @@ export default function Home() {
       <View style={{ flex: 1 }}>
         <HeaderTab />
         <View style={{ padding: 10 }}>
-          <Text style={{ fontSize: 24, marginBottom: "4%" }}>
+          <Text
+            style={{
+              fontSize: 24,
+              marginBottom: "4%",
+              fontFamily: fonts.semiBold,
+            }}>
             Welcome to our app
           </Text>
           <View style={styles.content}>
@@ -29,8 +35,10 @@ export default function Home() {
             </View>
             <View style={{ flex: 1, padding: "5%" }}>
               <View style={{ marginBottom: "16%" }}>
-                <Text style={{ fontSize: 24 }}>Best Helping Hand for You</Text>
-                <Text>
+                <Text style={{ fontSize: 24, fontFamily: fonts.regular }}>
+                  Best Helping Hand for You
+                </Text>
+                <Text style={{ fontFamily: fonts.regular }}>
                   We make sure excellent services through our expert workers
                 </Text>
               </View>
@@ -43,7 +51,7 @@ export default function Home() {
                 <TouchableOpacity
                   onPress={() => navigation.navigate("FormProject")}
                   style={styles.buttonBook}>
-                  <Text>Book Now!</Text>
+                  <Text style={{ fontFamily: fonts.regular }}>Book Now!</Text>
                 </TouchableOpacity>
               </View>
             </View>
@@ -63,12 +71,12 @@ const styles = StyleSheet.create({
     width: "95%",
     height: 200,
     overflow: "hidden",
-    backgroundColor: "#FFC536",
+    backgroundColor: colors.primary,
     borderTopRightRadius: 25,
     borderBottomRightRadius: 25,
   },
   buttonBook: {
-    backgroundColor: "white",
+    backgroundColor: colors.white,
     borderRadius: 25,
     borderWidth: 1,
     width: 100,

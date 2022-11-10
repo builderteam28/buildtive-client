@@ -6,6 +6,7 @@ import {
   Ionicons,
   MaterialCommunityIcons,
 } from "@expo/vector-icons";
+import { colors, fonts } from "../helpers/theme";
 
 export default function Details({ project }) {
   const formatPrice = (price) => {
@@ -22,7 +23,7 @@ export default function Details({ project }) {
               <MaterialCommunityIcons
                 name="clock"
                 size={20}
-                color="black"
+                color={colors.black}
                 style={styles.icon}
               />
               <Text style={styles.listText}>{project.tenor} day</Text>
@@ -31,7 +32,7 @@ export default function Details({ project }) {
               <FontAwesome5
                 name="money-bill"
                 size={16}
-                color="black"
+                color={colors.black}
                 style={styles.icon}
               />
               <Text style={styles.listText}>
@@ -42,7 +43,7 @@ export default function Details({ project }) {
               <FontAwesome
                 name="group"
                 size={16}
-                color="black"
+                color={colors.black}
                 style={styles.icon}
               />
               {project.status === "Complete" ? (
@@ -59,7 +60,7 @@ export default function Details({ project }) {
               <Ionicons
                 name="md-location-sharp"
                 size={20}
-                color="black"
+                color={colors.black}
                 style={styles.icon}
               />
               <Text style={styles.listText}>{project.address}</Text>
@@ -78,19 +79,20 @@ export default function Details({ project }) {
 const styles = StyleSheet.create({
   title: {
     fontSize: 20,
-    fontWeight: "600",
+    fontFamily: fonts.bold,
   },
   heading: {
     fontSize: 16,
-    fontWeight: "500",
+    fontFamily: fonts.semiBold,
   },
   listContainer: {
     marginTop: 10,
   },
   list: { flexDirection: "row", marginBottom: 10 },
-  listText: { fontSize: 15 },
-  icon: { alignSelf: "center", width: 30 },
+  listText: { fontSize: 15, fontFamily: fonts.regular },
+  icon: { alignSelf: "flex-end", width: 30 },
   description: {
     textAlign: "justify",
+    fontFamily: fonts.regular,
   },
 });

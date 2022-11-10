@@ -1,13 +1,10 @@
-import { useFocusEffect, useNavigation } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useDispatch } from "react-redux";
-import {
-  acceptWorker,
-  declineWorker,
-  getMyProjects,
-} from "../store/actions/projectActions";
-import React, { useEffect } from "react";
+import { acceptWorker, declineWorker } from "../store/actions/projectActions";
+import React from "react";
+import { colors, fonts } from "../helpers/theme";
 export default function ProjectWorkerCard({ projectWorker }) {
   const navigation = useNavigation();
   const dispatch = useDispatch();
@@ -35,7 +32,7 @@ export default function ProjectWorkerCard({ projectWorker }) {
             <Ionicons
               name="person-sharp"
               size={20}
-              color="black"
+              color={colors.black}
               style={styles.icon}
             />
             <Text style={styles.text}>{projectWorker.Worker.fullName}</Text>
@@ -44,7 +41,7 @@ export default function ProjectWorkerCard({ projectWorker }) {
             <Ionicons
               name="md-location-sharp"
               size={20}
-              color="black"
+              color={colors.black}
               style={styles.icon}
             />
             <Text style={styles.text}>{projectWorker.Worker.address}</Text>
@@ -57,7 +54,7 @@ export default function ProjectWorkerCard({ projectWorker }) {
                 WorkerId: projectWorker.Worker.id,
               })
             }
-            style={[styles.button, { backgroundColor: "#FFC536" }]}>
+            style={[styles.button, { backgroundColor: colors.primary }]}>
             <Text style={styles.textButton}>Profile</Text>
           </TouchableOpacity>
         </View>
@@ -68,7 +65,7 @@ export default function ProjectWorkerCard({ projectWorker }) {
             onPress={() => handleAccept()}
             style={[
               styles.button,
-              { marginHorizontal: 10, backgroundColor: "#00c853" },
+              { marginHorizontal: 10, backgroundColor: colors.green },
             ]}>
             <Text style={styles.textButton}>Accept</Text>
           </TouchableOpacity>
@@ -76,7 +73,7 @@ export default function ProjectWorkerCard({ projectWorker }) {
             onPress={() => handleDecline()}
             style={[
               styles.button,
-              { marginHorizontal: 10, backgroundColor: "#d50000" },
+              { marginHorizontal: 10, backgroundColor: colors.red },
             ]}>
             <Text style={styles.textButton}>Decline</Text>
           </TouchableOpacity>
@@ -84,17 +81,30 @@ export default function ProjectWorkerCard({ projectWorker }) {
       )}
       {projectWorker.status === "Accepted" && (
         <View style={styles.status}>
-          <Text style={{ color: "#00c853" }}>Worker already accepted</Text>
+          <Text style={{ color: colors.green, fontFamily: fonts.medium }}>
+            Worker already accepted
+          </Text>
         </View>
       )}
       {projectWorker.status === "Rejected" && (
         <View style={styles.status}>
-          <Text style={{ color: "#d50000" }}>Worker already rejected</Text>
+          <Text style={{ color: colors.red, fontFamily: fonts.medium }}>
+            Worker already rejected
+          </Text>
         </View>
       )}
       {projectWorker.status === "Occupied" && (
         <View style={styles.status}>
-          <Text>Worker already accepted in another project</Text>
+          <Text style={{ color: colors.navy, fontFamily: fonts.medium }}>
+            Worker already accepted in another project
+          </Text>
+        </View>
+      )}
+      {projectWorker.status === "Completed" && (
+        <View style={styles.status}>
+          <Text style={{ color: colors.navy, fontFamily: fonts.medium }}>
+            Worker already completed this project
+          </Text>
         </View>
       )}
     </TouchableOpacity>
@@ -123,7 +133,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginBottom: 6,
   },
-  text: { fontSize: 15 },
+  text: { fontSize: 15, fontFamily: fonts.medium },
   icon: { alignSelf: "center", width: 30 },
   button: {
     paddingHorizontal: 12,
@@ -131,8 +141,8 @@ const styles = StyleSheet.create({
     borderRadius: 25,
   },
   textButton: {
-    color: "white",
-    fontWeight: "500",
+    color: colors.white,
+    fontFamily: fonts.semiBold,
   },
   status: { justifyContent: "center", alignItems: "center" },
 });

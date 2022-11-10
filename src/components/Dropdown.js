@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { Dropdown } from "react-native-element-dropdown";
+import { colors, fonts } from "../helpers/theme";
 
 const DropdownComponent = ({
   data,
@@ -13,7 +14,12 @@ const DropdownComponent = ({
 
   return (
     <View style={styles.container}>
-      <Text style={{ alignSelf: "center", marginBottom: 4, fontWeight: "500" }}>
+      <Text
+        style={{
+          alignSelf: "center",
+          marginBottom: 4,
+          fontFamily: fonts.semiBold,
+        }}>
         {title}
       </Text>
       <Dropdown
@@ -44,10 +50,10 @@ export default DropdownComponent;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "white",
+    backgroundColor: colors.white,
   },
   dropdown: {
-    borderColor: "gray",
+    borderColor: colors.gray,
     borderWidth: 1,
     borderRadius: 8,
     paddingHorizontal: 8,
@@ -58,7 +64,7 @@ const styles = StyleSheet.create({
   },
   label: {
     position: "absolute",
-    backgroundColor: "white",
+    backgroundColor: colors.white,
     left: 22,
     top: 8,
     zIndex: 999,
@@ -70,6 +76,7 @@ const styles = StyleSheet.create({
   },
   selectedTextStyle: {
     fontSize: 16,
+    fontFamily: fonts.semiBold,
   },
   iconStyle: {
     width: 20,

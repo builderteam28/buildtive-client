@@ -8,6 +8,7 @@ import {
   useFonts,
   Raleway_100Thin,
   Raleway_400Regular,
+  Raleway_500Medium,
   Raleway_600SemiBold,
   Raleway_700Bold,
 } from "@expo-google-fonts/raleway";
@@ -16,6 +17,7 @@ export default function App() {
   let [fontsLoaded] = useFonts({
     Raleway_100Thin,
     Raleway_400Regular,
+    Raleway_500Medium,
     Raleway_600SemiBold,
     Raleway_700Bold,
   });

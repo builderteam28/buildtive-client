@@ -55,8 +55,8 @@ export default function FormProject() {
     },
     {
       id: 3,
-      label: "Toilet",
-      value: "Toilet",
+      label: "Carpentry",
+      value: "Carpentry",
     },
     {
       id: 4,

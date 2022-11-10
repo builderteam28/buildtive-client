@@ -3,6 +3,7 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { SvgUri } from "react-native-svg";
 import { useEffect, useState } from "react";
+import { fonts } from "../helpers/theme";
 export default function CardListWorker({ worker }) {
   const [uri, setUri] = useState("");
   const navigation = useNavigation();
@@ -19,10 +20,14 @@ export default function CardListWorker({ worker }) {
       <View style={styles.svg}>
         <SvgUri width="100%" height="100%" uri={uri} />
       </View>
-      <Text>{worker.Worker.fullName}</Text>
+      <Text style={{ fontFamily: fonts.regular }}>
+        {worker.Worker.fullName}
+      </Text>
       <View style={{ flexDirection: "row", alignItems: "center" }}>
         <MaterialIcons name="location-pin" size={14} color="black" />
-        <Text style={{ fontSize: 12 }}>{worker.Worker.address}</Text>
+        <Text style={{ fontSize: 12, fontFamily: fonts.regular }}>
+          {worker.Worker.address}
+        </Text>
       </View>
     </TouchableOpacity>
   );

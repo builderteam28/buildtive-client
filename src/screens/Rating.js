@@ -4,13 +4,19 @@ import { MaterialIcons, Ionicons } from "@expo/vector-icons";
 import { useDispatch } from "react-redux";
 import { createRatings } from "../store/actions/projectActions";
 import { useNavigation } from "@react-navigation/native";
+import { colors, fonts } from "../helpers/theme";
 export default function Rating({ route }) {
   const [starRating, setStarRating] = useState(null);
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const handleSubmitRating = () => {
-    dispatch(createRatings({ value: starRating, ProjectId: route.params.ProjectId }))
-      .then((data) => { if (data) {navigation.navigate("Projects")}});
+    dispatch(
+      createRatings({ value: starRating, ProjectId: route.params.ProjectId })
+    ).then((data) => {
+      if (data) {
+        navigation.navigate("Projects");
+      }
+    });
   };
   return (
     <>
@@ -72,7 +78,9 @@ export default function Rating({ route }) {
           </TouchableOpacity>
         </View>
         <View style={styles.info}>
-          <Text>Review will appear publicly </Text>
+          <Text style={{ fontFamily: fonts.regular }}>
+            Review will appear publicly{" "}
+          </Text>
           <Ionicons
             name="ios-information-circle-outline"
             size={14}
@@ -110,12 +118,13 @@ const styles = StyleSheet.create({
   },
   heading2: {
     fontSize: 16,
-    fontWeight: "500",
+    fontFamily: fonts.semiBold,
     textAlign: "center",
   },
   heading3: {
     fontSize: 14,
     textAlign: "center",
+    fontFamily: fonts.medium,
   },
   info: {
     flexDirection: "row",
@@ -125,11 +134,11 @@ const styles = StyleSheet.create({
     width: 300,
     height: 30,
     borderRadius: 20,
-    backgroundColor: "#00c853",
+    backgroundColor: colors.green,
     justifyContent: "center",
     alignItems: "center",
   },
-  submitText: { color: "white", fontWeight: "500" },
+  submitText: { color: colors.white, fontFamily: fonts.semiBold },
   stars: {
     display: "flex",
     flexDirection: "row",
