@@ -225,7 +225,7 @@ export default function FormProject() {
             <View style={styles.textInputContainer}>
               <FontAwesome5 name="money-bill" size={16} color="black" />
               <View style={{ justifyContent: "center", marginLeft: 6 }}>
-                <Text style={styles.titleInput}>Total Worker</Text>
+                <Text style={styles.titleInput}>Cost</Text>
                 <TextInput
                   selectionColor={"#FFC536"}
                   style={styles.textInput}

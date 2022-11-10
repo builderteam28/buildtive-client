@@ -1,3 +1,3 @@
-const globalBaseUrl = "https://6ac5-114-124-209-84.ap.ngrok.io";
+const globalBaseUrl = "https://buildtive-server.herokuapp.com";
 
 export default globalBaseUrl;
